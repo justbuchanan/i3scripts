@@ -8,11 +8,15 @@ i3 = i3ipc.Connection()
 
 def xprop(win_id, property):
     # note: requires xorg-xprop to be installed
-    prop = proc.check_output(['xprop', '-id', str(win_id), property])
-    prop = prop.decode('utf-8')
-    m = re.match('[^\=]+\= "([^\n"]+)', prop)
-    prop = m.group(1)
-    return prop
+    try:
+        prop = proc.check_output(['xprop', '-id', str(win_id), property])
+        prop = prop.decode('utf-8')
+        m = re.match('[^\=]+\= "([^\n"]+)', prop)
+        prop = m.group(1)
+        return prop
+    except proc.CalledProcessError as e:
+        print("Unable to get property for window %" % str(win_id))
+
 
 def icon_for_window(window):
     icons = {
