@@ -19,6 +19,7 @@ def xprop(win_id, property):
         return prop
     except proc.CalledProcessError as e:
         print("Unable to get property for window %" % str(win_id))
+        return None
 
 
 def icon_for_window(window):
