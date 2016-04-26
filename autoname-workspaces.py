@@ -14,9 +14,7 @@ def xprop(win_id, property):
     try:
         prop = proc.check_output(['xprop', '-id', str(win_id), property])
         prop = prop.decode('utf-8')
-        m = re.match('[^\=]+\= "([^\n"]+)', prop)
-        prop = m.group(1)
-        return prop
+        return re.findall('"([^"]+)"', prop)
     except proc.CalledProcessError as e:
         print("Unable to get property for window %" % str(win_id))
         return None
@@ -28,10 +26,14 @@ def icon_for_window(window):
         'urxvt': '\uf120',
         'google-chrome': '\uf268',
         'subl': '\uf1c9',
+        'subl3': '\uf1c9',
         'spotify': '\uf001',
     }
-    cls = xprop(window.window, 'WM_CLASS')
-    return icons[cls] if cls in icons else '*'
+    classes = xprop(window.window, 'WM_CLASS')
+    for cls in classes:
+        if cls in icons:
+            return icons[cls]
+    return '*'
 
 # renames all workspaces based on the windows present
 def rename():
