@@ -26,7 +26,8 @@ def icon_for_window(window):
     icons = {
         'urxvt': '\uf120',
         'google-chrome': '\uf268',
-        'subl': '\uf1c9'
+        'subl': '\uf1c9',
+        'spotify': '\uf001',
     }
     cls = xprop(window.window, 'WM_CLASS')
     return icons[cls] if cls in icons else '*'
