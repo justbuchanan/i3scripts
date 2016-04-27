@@ -12,16 +12,16 @@ import re
 # names and the icons can be any text you want to display. However most of
 # these are character codes for font awesome:
 #   http://fortawesome.github.io/Font-Awesome/icons/
+FA_CHROME = '\uf268'
+FA_CODE = '\uf121'
+FA_FILE_PDF_O = '\uf1c1'
+FA_FILE_TEXT_O = '\uf0f6'
 FA_FILES_O = '\uf0c5'
 FA_FIREFOX = '\uf269'
-FA_CODE = '\uf121'
-FA_TERMINAL = '\uf120'
-FA_CHROME = '\uf268'
-FA_SPOTIFY = '\uf1bc'
 FA_MUSIC = '\uf001'
-FA_FILE_PDF_O = '\uf1c1'
 FA_PICTURE_O = '\uf03e'
-FA_FILE_TEXT_O = '\uf0f6'
+FA_SPOTIFY = '\uf1bc'
+FA_TERMINAL = '\uf120'
 WINDOW_ICONS = {
     'urxvt': FA_TERMINAL,
     'google-chrome': FA_CHROME,
