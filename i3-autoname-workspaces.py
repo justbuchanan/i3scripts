@@ -1,7 +1,13 @@
 #!/usr/bin/env python3
 
 # This script listens for i3 events and updates workspace names to show icons
-# for running programs.
+# for running programs.  It contains icons for a few programs, but more can
+# easily be added by inserting them into WINDOW_ICONS below.
+#
+# Dependencies
+# * xorg-xprop - install through system package manager
+# * i3ipc - install with pip
+
 
 import i3ipc
 import subprocess as proc
@@ -9,8 +15,8 @@ import re
 
 
 # Add icons here for common programs you use.  The keys are the X window class
-# names and the icons can be any text you want to display. However most of
-# these are character codes for font awesome:
+# (WM_CLASS) names and the icons can be any text you want to display. However
+# most of these are character codes for font awesome:
 #   http://fortawesome.github.io/Font-Awesome/icons/
 FA_CHROME = '\uf268'
 FA_CODE = '\uf121'
