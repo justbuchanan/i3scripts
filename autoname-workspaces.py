@@ -21,18 +21,26 @@ def xprop(win_id, property):
 
 
 def icon_for_window(window):
-    # add icons to this list for common programs you use
+    # Add icons to this list for common programs you use.
+    # Most of these are character codes for font awesome:
+    #   http://fortawesome.github.io/Font-Awesome/icons/
     icons = {
         'urxvt': '\uf120',
         'google-chrome': '\uf268',
         'subl': '\uf1c9',
         'subl3': '\uf1c9',
         'spotify': '\uf001',
+        'Firefox': '\uf269',
+        'libreoffice': '\uf0f6',
+        'feh': '\uf03e',
+        'mupdf': '\uf1c1',
+        'evince': '\uf1c1',
     }
     classes = xprop(window.window, 'WM_CLASS')
     for cls in classes:
         if cls in icons:
             return icons[cls]
+    print('No icon available for window with classes: %s' % str(classes))
     return '*'
 
 # renames all workspaces based on the windows present
