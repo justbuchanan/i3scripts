@@ -71,7 +71,8 @@ def icon_for_window(window):
 def rename():
     for workspace in i3.get_tree().workspaces():
         icons = [icon_for_window(w) for w in workspace.leaves()]
-        new_name = "%d: %s" % (workspace.num, '  '.join(icons))
+        icon_str = ': ' + ' '.join(icons) if len(icons) else ''
+        new_name = str(workspace.num) + icon_str
         i3.command('rename workspace "%s" to "%s"' % (workspace.name, new_name))
 
 rename()
