@@ -59,7 +59,7 @@ def xprop(win_id, property):
 
 def icon_for_window(window):
     classes = xprop(window.window, 'WM_CLASS')
-    if classes != None:
+    if classes != None and len(classes) > 0:
         for cls in classes:
             if cls in WINDOW_ICONS:
                 return WINDOW_ICONS[cls]
