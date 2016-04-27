@@ -58,7 +58,6 @@ def xprop(win_id, property):
         print("Unable to get property for window '%s'" % str(win_id))
         return None
 
-
 def icon_for_window(window):
     classes = xprop(window.window, 'WM_CLASS')
     if classes != None and len(classes) > 0:
