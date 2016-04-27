@@ -12,17 +12,28 @@ import re
 # names and the icons can be any text you want to display. However most of
 # these are character codes for font awesome:
 #   http://fortawesome.github.io/Font-Awesome/icons/
+FA_FILES_O = '\uf0c5'
+FA_FIREFOX = '\uf269'
+FA_CODE = '\uf121'
+FA_TERMINAL = '\uf120'
+FA_CHROME = '\uf268'
+FA_SPOTIFY = '\uf1bc'
+FA_MUSIC = '\uf001'
+FA_FILE_PDF_O = '\uf1c1'
+FA_PICTURE_O = '\uf03e'
+FA_FILE_TEXT_O = '\uf0f6'
 WINDOW_ICONS = {
-    'urxvt': '\uf120',
-    'google-chrome': '\uf268',
-    'subl': '\uf1c9',
-    'subl3': '\uf1c9',
-    'spotify': '\uf001',
-    'Firefox': '\uf269',
-    'libreoffice': '\uf0f6',
-    'feh': '\uf03e',
-    'mupdf': '\uf1c1',
-    'evince': '\uf1c1',
+    'urxvt': FA_TERMINAL,
+    'google-chrome': FA_CHROME,
+    'subl': FA_CODE,
+    'subl3': FA_CODE,
+    'spotify': FA_MUSIC,
+    'Firefox': FA_FIREFOX,
+    'libreoffice': FA_FILE_TEXT_O,
+    'feh': FA_PICTURE_O,
+    'mupdf': FA_FILE_PDF_O,
+    'evince': FA_FILE_PDF_O,
+    'thunar': FA_FILES_O,
 }
 
 
