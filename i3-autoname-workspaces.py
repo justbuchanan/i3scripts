@@ -12,6 +12,8 @@
 import i3ipc
 import subprocess as proc
 import re
+import signal
+import sys
 
 
 # Add icons here for common programs you use.  The keys are the X window class
@@ -74,6 +76,12 @@ def rename():
         i3.command('rename workspace "%s" to "%s"' % (workspace.name, new_name))
 
 rename()
+
+# exit gracefully when ctrl+c is pressed
+def signal_handler(signal, frame):
+    i3.main_quit()
+    sys.exit(0)
+signal.signal(signal.SIGINT, signal_handler)
 
 # call rename() for relevant window events
 def on_change(i3, e):
