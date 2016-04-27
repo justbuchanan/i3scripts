@@ -43,20 +43,21 @@ i3 = i3ipc.Connection()
 # requires xorg-xprop to be installed.
 def xprop(win_id, property):
     try:
-        prop = proc.check_output(['xprop', '-id', str(win_id), property])
+        prop = proc.check_output(['xprop', '-id', str(win_id), property], stderr=proc.DEVNULL)
         prop = prop.decode('utf-8')
         return re.findall('"([^"]+)"', prop)
     except proc.CalledProcessError as e:
-        print("Unable to get property for window %" % str(win_id))
+        print("Unable to get property for window '%s'" % str(win_id))
         return None
 
 
 def icon_for_window(window):
     classes = xprop(window.window, 'WM_CLASS')
-    for cls in classes:
-        if cls in WINDOW_ICONS:
-            return WINDOW_ICONS[cls]
-    print('No icon available for window with classes: %s' % str(classes))
+    if classes != None:
+        for cls in classes:
+            if cls in WINDOW_ICONS:
+                return WINDOW_ICONS[cls]
+        print('No icon available for window with classes: %s' % str(classes))
     return '*'
 
 # renames all workspaces based on the windows present
