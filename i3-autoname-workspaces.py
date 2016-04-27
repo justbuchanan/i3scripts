@@ -79,6 +79,10 @@ rename()
 
 # exit gracefully when ctrl+c is pressed
 def signal_handler(signal, frame):
+    # rename workspaces to just numbers on exit to indicate that this script is
+    # no longer running
+    for workspace in i3.get_tree().workspaces():
+        i3.command('rename workspace "%s" to "%d"' % (workspace.name, workspace.num))
     i3.main_quit()
     sys.exit(0)
 signal.signal(signal.SIGINT, signal_handler)
