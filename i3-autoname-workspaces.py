@@ -7,6 +7,20 @@
 # Dependencies
 # * xorg-xprop - install through system package manager
 # * i3ipc - install with pip
+#
+# Installation:
+# * Download this script and place it in ~/.config/i3/ (or anywhere you want)
+# * Add "exec_always ~/.config/i3/i3-autoname-workspaces.py &" to your i3 config
+# * Restart i3: "$ i3-msg restart"
+#
+# Configuration:
+# The default i3 config's keybingings reference workspaces by name, which is an
+# issue when using this script because the names are constantaly changing to
+# show window icons.  Instead, you'll need to change the keybindings to
+# reference workspaces by number.  Change lines like:
+#   bindsym $mod+1 workspace 1
+# To:
+#   bindsym $mod+1 workspace number 1
 
 
 import i3ipc
