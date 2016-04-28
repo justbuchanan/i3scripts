@@ -100,6 +100,7 @@ def signal_handler(signal, frame):
     i3.main_quit()
     sys.exit(0)
 signal.signal(signal.SIGINT, signal_handler)
+signal.signal(signal.SIGTERM, signal_handler)
 
 # call rename() for relevant window events
 def on_change(i3, e):
