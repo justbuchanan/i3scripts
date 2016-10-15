@@ -29,6 +29,8 @@ import re
 import signal
 import sys
 
+from util import *
+
 
 # Add icons here for common programs you use.  The keys are the X window class
 # (WM_CLASS) names and the icons can be any text you want to display. However
@@ -61,6 +63,7 @@ WINDOW_ICONS = {
 
 i3 = i3ipc.Connection()
 
+
 # Returns an array of the values for the given property from xprop.  This
 # requires xorg-xprop to be installed.
 def xprop(win_id, property):
@@ -84,19 +87,22 @@ def icon_for_window(window):
 # renames all workspaces based on the windows present
 def rename():
     for workspace in i3.get_tree().workspaces():
-        icons = [icon_for_window(w) for w in workspace.leaves()]
-        icon_str = ': ' + ' '.join(icons) if len(icons) else ''
-        new_name = str(workspace.num) + icon_str
+        name_parts = parse_workspace_name(workspace.name)
+        name_parts['icons'] = ' '.join([icon_for_window(w) for w in workspace.leaves()])
+        new_name = construct_workspace_name(name_parts)
         i3.command('rename workspace "%s" to "%s"' % (workspace.name, new_name))
 
 rename()
 
 # exit gracefully when ctrl+c is pressed
 def signal_handler(signal, frame):
-    # rename workspaces to just numbers on exit to indicate that this script is
-    # no longer running
+    # rename workspaces to just numbers and shortnames on exit to indicate that
+    # this script is no longer running
     for workspace in i3.get_tree().workspaces():
-        i3.command('rename workspace "%s" to "%d"' % (workspace.name, workspace.num))
+        name_parts = parse_workspace_name(workspace.name)
+        name_parts['icons'] = None
+        new_name = construct_workspace_name(name_parts)
+        i3.command('rename workspace "%s" to "%s"' % (workspace.name, new_name))
     i3.main_quit()
     sys.exit(0)
 signal.signal(signal.SIGINT, signal_handler)
