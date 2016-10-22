@@ -74,6 +74,7 @@ def icon_for_window(window):
     classes = xprop(window.window, 'WM_CLASS')
     if classes != None and len(classes) > 0:
         for cls in classes:
+            cls = cls.lower() # case-insensitive matching
             if cls in WINDOW_ICONS:
                 return WINDOW_ICONS[cls]
         print('No icon available for window with classes: %s' % str(classes))
