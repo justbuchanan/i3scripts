@@ -7,6 +7,7 @@
 # Dependencies
 # * xorg-xprop - install through system package manager
 # * i3ipc - install with pip
+# * fontawesome - install with pip
 #
 # Installation:
 # * Download this script and place it in ~/.config/i3/ (or anywhere you want)
@@ -28,6 +29,7 @@ import subprocess as proc
 import re
 import signal
 import sys
+import fontawesome as fa
 
 from util import *
 
@@ -36,28 +38,21 @@ from util import *
 # (WM_CLASS) names and the icons can be any text you want to display. However
 # most of these are character codes for font awesome:
 #   http://fortawesome.github.io/Font-Awesome/icons/
-FA_CHROME = '\uf268'
-FA_CODE = '\uf121'
-FA_FILE_PDF_O = '\uf1c1'
-FA_FILE_TEXT_O = '\uf0f6'
-FA_FILES_O = '\uf0c5'
-FA_FIREFOX = '\uf269'
-FA_MUSIC = '\uf001'
-FA_PICTURE_O = '\uf03e'
-FA_SPOTIFY = '\uf1bc'
-FA_TERMINAL = '\uf120'
+# If you're not sure what the WM_CLASS is for your application, you can use
+# xprop (https://linux.die.net/man/1/xprop). Run `xprop | grep WM_CLASS`
+# then click on the application you want to inspect.
 WINDOW_ICONS = {
-    'urxvt': FA_TERMINAL,
-    'google-chrome': FA_CHROME,
-    'subl': FA_CODE,
-    'subl3': FA_CODE,
-    'spotify': FA_MUSIC,
-    'Firefox': FA_FIREFOX,
-    'libreoffice': FA_FILE_TEXT_O,
-    'feh': FA_PICTURE_O,
-    'mupdf': FA_FILE_PDF_O,
-    'evince': FA_FILE_PDF_O,
-    'thunar': FA_FILES_O,
+    'urxvt': fa.icons['terminal'],
+    'google-chrome': fa.icons['chrome'],
+    'subl': fa.icons['code'],
+    'subl3': fa.icons['code'],
+    'spotify': fa.icons['music'],
+    'Firefox': fa.icons['firefox'],
+    'libreoffice': fa.icons['file-text-o'],
+    'feh': fa.icons['picture-o'],
+    'mupdf': fa.icons['file-pdf-o'],
+    'evince': fa.icons['file-pdf-o'],
+    'thunar': fa.icons['files-o'],
 }
 
 
