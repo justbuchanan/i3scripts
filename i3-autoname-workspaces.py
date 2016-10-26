@@ -67,7 +67,7 @@ def xprop(win_id, property):
         prop = prop.decode('utf-8')
         return re.findall('"([^"]+)"', prop)
     except proc.CalledProcessError as e:
-        print("Unable to get property for window '%s'" % str(win_id))
+        print("Unable to get property for window '%d'" % win_id)
         return None
 
 def icon_for_window(window):
