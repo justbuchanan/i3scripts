@@ -44,9 +44,9 @@ from util import *
 WINDOW_ICONS = {
     'urxvt': fa.icons['terminal'],
     'google-chrome': fa.icons['chrome'],
-    'subl': fa.icons['code'],
-    'subl3': fa.icons['code'],
-    'spotify': fa.icons['music'],
+    'subl': fa.icons['file-text-o'],
+    'subl3': fa.icons['file-text-o'],
+    'spotify': fa.icons['music'], # could also use 'spotify' from font awesome
     'firefox': fa.icons['firefox'],
     'libreoffice': fa.icons['file-text-o'],
     'feh': fa.icons['picture-o'],
@@ -55,6 +55,8 @@ WINDOW_ICONS = {
     'thunar': fa.icons['files-o'],
     'gpick': fa.icons['eyedropper'],
     'atom': fa.icons['code'],
+    'steam': fa.icons['steam'],
+    'zenity': fa.icons['window-maximize'],
 }
 
 # This icon is used for any application not in the list above
