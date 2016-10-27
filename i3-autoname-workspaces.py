@@ -57,6 +57,9 @@ WINDOW_ICONS = {
     'atom': fa.icons['code'],
 }
 
+# This icon is used for any application not in the list above
+DEFAULT_ICON = '*'
+
 
 i3 = i3ipc.Connection()
 
@@ -80,7 +83,7 @@ def icon_for_window(window):
             if cls in WINDOW_ICONS:
                 return WINDOW_ICONS[cls]
         print('No icon available for window with classes: %s' % str(classes))
-    return '*'
+    return DEFAULT_ICON
 
 # renames all workspaces based on the windows present
 def rename():
