@@ -47,12 +47,14 @@ WINDOW_ICONS = {
     'subl': fa.icons['code'],
     'subl3': fa.icons['code'],
     'spotify': fa.icons['music'],
-    'Firefox': fa.icons['firefox'],
+    'firefox': fa.icons['firefox'],
     'libreoffice': fa.icons['file-text-o'],
     'feh': fa.icons['picture-o'],
     'mupdf': fa.icons['file-pdf-o'],
     'evince': fa.icons['file-pdf-o'],
     'thunar': fa.icons['files-o'],
+    'gpick': fa.icons['eyedropper'],
+    'atom': fa.icons['code'],
 }
 
 
