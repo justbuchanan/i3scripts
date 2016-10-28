@@ -16,7 +16,7 @@
 #
 # Configuration:
 # The default i3 config's keybingings reference workspaces by name, which is an
-# issue when using this script because the names are constantaly changing to
+# issue when using this script because the "names" are constantaly changing to
 # show window icons.  Instead, you'll need to change the keybindings to
 # reference workspaces by number.  Change lines like:
 #   bindsym $mod+1 workspace 1
@@ -35,8 +35,8 @@ from util import *
 
 
 # Add icons here for common programs you use.  The keys are the X window class
-# (WM_CLASS) names and the icons can be any text you want to display. However
-# most of these are character codes for font awesome:
+# (WM_CLASS) names (lower-cased) and the icons can be any text you want to
+# display. However most of these are character codes for font awesome:
 #   http://fortawesome.github.io/Font-Awesome/icons/
 # If you're not sure what the WM_CLASS is for your application, you can use
 # xprop (https://linux.die.net/man/1/xprop). Run `xprop | grep WM_CLASS`
