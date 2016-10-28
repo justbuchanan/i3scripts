@@ -13,10 +13,10 @@ def construct_workspace_name(parts):
     if parts['shortname'] or parts['icons']:
         new_name += ':'
 
-    if parts['shortname']:
-        new_name += parts['shortname']
+        if parts['shortname']:
+            new_name += parts['shortname']
 
-    if parts['icons']:
-        new_name += ' ' + parts['icons']
+        if parts['icons']:
+            new_name += ' ' + parts['icons']
 
     return new_name

@@ -36,8 +36,11 @@ from util import *
 
 # Add icons here for common programs you use.  The keys are the X window class
 # (WM_CLASS) names (lower-cased) and the icons can be any text you want to
-# display. However most of these are character codes for font awesome:
+# display.
+#
+# Most of these are character codes for font awesome:
 #   http://fortawesome.github.io/Font-Awesome/icons/
+#
 # If you're not sure what the WM_CLASS is for your application, you can use
 # xprop (https://linux.die.net/man/1/xprop). Run `xprop | grep WM_CLASS`
 # then click on the application you want to inspect.

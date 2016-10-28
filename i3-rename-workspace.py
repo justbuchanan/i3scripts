@@ -41,12 +41,12 @@ try:
         proc.check_call(['zenity', '--error', '--text=%s' % msg])
         sys.exit(1)
 
-
-    name_parts['shortname'] = new_shortname
-    new_name = construct_workspace_name(name_parts)
-
-    # get the current workspace and rename it
-    workspace = [w for w in i3.get_workspaces() if w.focused][0]
-    res = i3.command('rename workspace "%s" to "%s"' % (workspace.name, new_name))
 except proc.CalledProcessError as e:
     logging.info("Cancelled by user, exiting...")
+
+name_parts['shortname'] = new_shortname
+new_name = construct_workspace_name(name_parts)
+
+# get the current workspace and rename it
+workspace = [w for w in i3.get_workspaces() if w.focused][0]
+res = i3.command('rename workspace "%s" to "%s"' % (workspace.name, new_name))
