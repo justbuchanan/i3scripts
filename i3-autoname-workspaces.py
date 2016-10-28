@@ -63,9 +63,6 @@ WINDOW_ICONS = {
 DEFAULT_ICON = '*'
 
 
-i3 = i3ipc.Connection()
-
-
 # Returns an array of the values for the given property from xprop.  This
 # requires xorg-xprop to be installed.
 def xprop(win_id, property):
@@ -88,19 +85,16 @@ def icon_for_window(window):
     return DEFAULT_ICON
 
 # renames all workspaces based on the windows present
-def rename():
+def rename_workspaces(i3):
     for workspace in i3.get_tree().workspaces():
         name_parts = parse_workspace_name(workspace.name)
         name_parts['icons'] = ' '.join([icon_for_window(w) for w in workspace.leaves()])
         new_name = construct_workspace_name(name_parts)
         i3.command('rename workspace "%s" to "%s"' % (workspace.name, new_name))
 
-rename()
-
-# exit gracefully when ctrl+c is pressed
-def signal_handler(signal, frame):
-    # rename workspaces to just numbers and shortnames on exit to indicate that
-    # this script is no longer running
+# rename workspaces to just numbers and shortnames.
+# called on exit to indicate that this script is no longer running.
+def undo_window_renaming(i3):
     for workspace in i3.get_tree().workspaces():
         name_parts = parse_workspace_name(workspace.name)
         name_parts['icons'] = None
@@ -108,12 +102,21 @@ def signal_handler(signal, frame):
         i3.command('rename workspace "%s" to "%s"' % (workspace.name, new_name))
     i3.main_quit()
     sys.exit(0)
-signal.signal(signal.SIGINT, signal_handler)
-signal.signal(signal.SIGTERM, signal_handler)
 
-# call rename() for relevant window events
-def on_change(i3, e):
-    if e.change in ['new', 'close', 'move']:
-        rename()
-i3.on('window', on_change)
-i3.main()
+
+if __name__ == '__main__':
+    i3 = i3ipc.Connection()
+
+    # exit gracefully when ctrl+c is pressed
+    for sig in [signal.SIGINT, signal.SIGTERM]:
+        signal.signal(sig, lambda signal, frame: undo_window_renaming(i3))
+
+    # call rename_workspaces() for relevant window events
+    def window_event_handler(i3, e):
+        if e.change in ['new', 'close', 'move']:
+            rename_workspaces(i3)
+    i3.on('window', window_event_handler)
+
+    rename_workspaces(i3)
+
+    i3.main()
