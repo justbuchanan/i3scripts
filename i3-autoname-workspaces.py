@@ -88,10 +88,27 @@ def icon_for_window(window):
     return DEFAULT_ICON
 
 # renames all workspaces based on the windows present
+# also renumbers them in ascending order, with one gap left between monitors
+# for example: workspace numbering on two monitors: [1, 2, 3], [5, 6]
 def rename_workspaces(i3):
-    for workspace in i3.get_tree().workspaces():
+    ws_infos = i3.get_workspaces()
+    prev_output = ""
+    n = 1
+    for ws_index, workspace in enumerate(i3.get_tree().workspaces()):
+        ws_info = ws_infos[ws_index]
+
         name_parts = parse_workspace_name(workspace.name)
         name_parts['icons'] = ' '.join([icon_for_window(w) for w in workspace.leaves()])
+
+        # as we enumerate, leave one gap between each workspace
+        if ws_info.output != prev_output and prev_output != "":
+            n += 1 # leave a gap
+        prev_output = ws_info.output
+
+        # renumber workspace
+        name_parts['num'] = n
+        n += 1
+
         new_name = construct_workspace_name(name_parts)
         i3.command('rename workspace "%s" to "%s"' % (workspace.name, new_name))
 
