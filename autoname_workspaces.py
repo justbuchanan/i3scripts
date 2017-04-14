@@ -4,6 +4,10 @@
 # for running programs.  It contains icons for a few programs, but more can
 # easily be added by inserting them into WINDOW_ICONS below.
 #
+# It also renumbers workspaces in ascending order with one skipped number
+# between monitors. By default, i3 workspace numbers are sticky, so they quickly
+# get out of order.
+#
 # Dependencies
 # * xorg-xprop - install through system package manager
 # * i3ipc - install with pip
@@ -15,7 +19,7 @@
 # * Restart i3: "$ i3-msg restart"
 #
 # Configuration:
-# The default i3 config's keybingings reference workspaces by name, which is an
+# The default i3 config's keybindings reference workspaces by name, which is an
 # issue when using this script because the "names" are constantaly changing to
 # show window icons.  Instead, you'll need to change the keybindings to
 # reference workspaces by number.  Change lines like:
@@ -25,8 +29,7 @@
 
 
 import i3ipc
-import subprocess as proc
-import re
+import logging
 import signal
 import sys
 import fontawesome as fa
@@ -45,20 +48,21 @@ from util import *
 # xprop (https://linux.die.net/man/1/xprop). Run `xprop | grep WM_CLASS`
 # then click on the application you want to inspect.
 WINDOW_ICONS = {
-    'urxvt': fa.icons['terminal'],
+    'atom': fa.icons['code'],
+    'cura': fa.icons['cube'],
+    'evince': fa.icons['file-pdf-o'],
+    'feh': fa.icons['picture-o'],
+    'firefox': fa.icons['firefox'],
     'google-chrome': fa.icons['chrome'],
+    'gpick': fa.icons['eyedropper'],
+    'libreoffice': fa.icons['file-text-o'],
+    'mupdf': fa.icons['file-pdf-o'],
+    'spotify': fa.icons['music'], # could also use the 'spotify' icon
+    'steam': fa.icons['steam'],
     'subl': fa.icons['file-text-o'],
     'subl3': fa.icons['file-text-o'],
-    'spotify': fa.icons['music'], # could also use 'spotify' from font awesome
-    'firefox': fa.icons['firefox'],
-    'libreoffice': fa.icons['file-text-o'],
-    'feh': fa.icons['picture-o'],
-    'mupdf': fa.icons['file-pdf-o'],
-    'evince': fa.icons['file-pdf-o'],
     'thunar': fa.icons['files-o'],
-    'gpick': fa.icons['eyedropper'],
-    'atom': fa.icons['code'],
-    'steam': fa.icons['steam'],
+    'urxvt': fa.icons['terminal'],
     'zenity': fa.icons['window-maximize'],
 }
 
@@ -66,25 +70,15 @@ WINDOW_ICONS = {
 DEFAULT_ICON = '*'
 
 
-# Returns an array of the values for the given property from xprop.  This
-# requires xorg-xprop to be installed.
-def xprop(win_id, property):
-    try:
-        prop = proc.check_output(['xprop', '-id', str(win_id), property], stderr=proc.DEVNULL)
-        prop = prop.decode('utf-8')
-        return re.findall('"([^"]+)"', prop)
-    except proc.CalledProcessError as e:
-        print("Unable to get property for window '%d'" % win_id)
-        return None
-
 def icon_for_window(window):
+    # Try all window classes and use the first one we have an icon for
     classes = xprop(window.window, 'WM_CLASS')
     if classes != None and len(classes) > 0:
         for cls in classes:
             cls = cls.lower() # case-insensitive matching
             if cls in WINDOW_ICONS:
                 return WINDOW_ICONS[cls]
-        print('No icon available for window with classes: %s' % str(classes))
+    logging.info('No icon available for window with classes: %s' % str(classes))
     return DEFAULT_ICON
 
 # renames all workspaces based on the windows present
@@ -92,7 +86,7 @@ def icon_for_window(window):
 # for example: workspace numbering on two monitors: [1, 2, 3], [5, 6]
 def rename_workspaces(i3):
     ws_infos = i3.get_workspaces()
-    prev_output = ""
+    prev_output = None
     n = 1
     for ws_index, workspace in enumerate(i3.get_tree().workspaces()):
         ws_info = ws_infos[ws_index]
@@ -100,9 +94,10 @@ def rename_workspaces(i3):
         name_parts = parse_workspace_name(workspace.name)
         name_parts['icons'] = ' '.join([icon_for_window(w) for w in workspace.leaves()])
 
-        # as we enumerate, leave one gap between each workspace
-        if ws_info.output != prev_output and prev_output != "":
-            n += 1 # leave a gap
+        # As we enumerate, leave one gap in workspace numbers between each monitor.
+        # This leaves a space to insert a new one later.
+        if ws_info.output != prev_output and prev_output != None:
+            n += 1
         prev_output = ws_info.output
 
         # renumber workspace
@@ -112,9 +107,8 @@ def rename_workspaces(i3):
         new_name = construct_workspace_name(name_parts)
         i3.command('rename workspace "%s" to "%s"' % (workspace.name, new_name))
 
-# rename workspaces to just numbers and shortnames.
-# called on exit to indicate that this script is no longer running.
-def undo_window_renaming(i3):
+# Rename workspaces to just numbers and shortnames, removing the icons.
+def on_exit(i3):
     for workspace in i3.get_tree().workspaces():
         name_parts = parse_workspace_name(workspace.name)
         name_parts['icons'] = None
@@ -125,18 +119,19 @@ def undo_window_renaming(i3):
 
 
 if __name__ == '__main__':
+    logging.basicConfig(level=logging.INFO)
+
     i3 = i3ipc.Connection()
 
-    # exit gracefully when ctrl+c is pressed
+    # Exit gracefully when ctrl+c is pressed
     for sig in [signal.SIGINT, signal.SIGTERM]:
-        signal.signal(sig, lambda signal, frame: undo_window_renaming(i3))
+        signal.signal(sig, lambda signal, frame: on_exit(i3))
 
-    # call rename_workspaces() for relevant window events
+    rename_workspaces(i3)
+
+    # Call rename_workspaces() for relevant window events
     def window_event_handler(i3, e):
         if e.change in ['new', 'close', 'move']:
             rename_workspaces(i3)
     i3.on('window', window_event_handler)
-
-    rename_workspaces(i3)
-
     i3.main()
