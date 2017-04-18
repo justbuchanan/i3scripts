@@ -27,7 +27,6 @@
 # To:
 #   bindsym $mod+1 workspace number 1
 
-
 import i3ipc
 import logging
 import signal
@@ -35,7 +34,6 @@ import sys
 import fontawesome as fa
 
 from util import *
-
 
 # Add icons here for common programs you use.  The keys are the X window class
 # (WM_CLASS) names (lower-cased) and the icons can be any text you want to
@@ -57,7 +55,7 @@ WINDOW_ICONS = {
     'gpick': fa.icons['eyedropper'],
     'libreoffice': fa.icons['file-text-o'],
     'mupdf': fa.icons['file-pdf-o'],
-    'spotify': fa.icons['music'], # could also use the 'spotify' icon
+    'spotify': fa.icons['music'],  # could also use the 'spotify' icon
     'steam': fa.icons['steam'],
     'subl': fa.icons['file-text-o'],
     'subl3': fa.icons['file-text-o'],
@@ -75,11 +73,12 @@ def icon_for_window(window):
     classes = xprop(window.window, 'WM_CLASS')
     if classes != None and len(classes) > 0:
         for cls in classes:
-            cls = cls.lower() # case-insensitive matching
+            cls = cls.lower()  # case-insensitive matching
             if cls in WINDOW_ICONS:
                 return WINDOW_ICONS[cls]
     logging.info('No icon available for window with classes: %s' % str(classes))
     return DEFAULT_ICON
+
 
 # renames all workspaces based on the windows present
 # also renumbers them in ascending order, with one gap left between monitors
@@ -92,7 +91,8 @@ def rename_workspaces(i3):
         ws_info = ws_infos[ws_index]
 
         name_parts = parse_workspace_name(workspace.name)
-        name_parts['icons'] = ' '.join([icon_for_window(w) for w in workspace.leaves()])
+        name_parts['icons'] = ' '.join([icon_for_window(w)
+                                        for w in workspace.leaves()])
 
         # As we enumerate, leave one gap in workspace numbers between each monitor.
         # This leaves a space to insert a new one later.
@@ -106,6 +106,7 @@ def rename_workspaces(i3):
 
         new_name = construct_workspace_name(name_parts)
         i3.command('rename workspace "%s" to "%s"' % (workspace.name, new_name))
+
 
 # Rename workspaces to just numbers and shortnames, removing the icons.
 def on_exit(i3):
@@ -133,5 +134,6 @@ if __name__ == '__main__':
     def window_event_handler(i3, e):
         if e.change in ['new', 'close', 'move']:
             rename_workspaces(i3)
+
     i3.on('window', window_event_handler)
     i3.main()
