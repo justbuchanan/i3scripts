@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
 
-## This script is used to dynamically rename workspace names in i3.
-# When run, it presents a text field popup using zenity, in which you can type a
-# new name for the workspace. It is compatible with the i3-autoname-workspaces
-# script and renames only the "shortname" of the workspace, keeping the number
-# and window icons in place.
-#
-# Note that this script can be used without i3-autoname-workspaces.py
-#
+# This script is used to dynamically rename workspaces in i3. When run, it
+# presents a text field popup using zenity, in which you can type a new name for
+# the workspace. It is compatible with the autoname_workspaces script and
+# renames only the "shortname" of the workspace, keeping the number and window
+# icons in place.
+# 
+# Note that this script can be used without autoname_workspaces.py.
+# 
 # Dependencies:
 # * zenity - install with system package manager
-# * i3ipc - install with pip
+# * i3ipc  - install with pip
 
 import i3ipc
 import logging
