@@ -44,6 +44,7 @@ if __name__ == '__main__':
 
     except proc.CalledProcessError as e:
         logging.info("Cancelled by user, exiting...")
+        sys.exit(1)
 
     name_parts['shortname'] = new_shortname
     new_name = construct_workspace_name(name_parts)
