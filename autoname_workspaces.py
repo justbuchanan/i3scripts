@@ -62,6 +62,7 @@ WINDOW_ICONS = {
     'subl3': fa.icons['file-text-o'],
     'thunar': fa.icons['files-o'],
     'urxvt': fa.icons['terminal'],
+    'xfce4-terminal': fa.icons['terminal'],
     'zenity': fa.icons['window-maximize'],
 }
 
@@ -91,6 +92,9 @@ def rename_workspaces(i3):
     for ws_index, workspace in enumerate(i3.get_tree().workspaces()):
         ws_info = ws_infos[ws_index]
 
+        if ws_info != focused_workspace(i3):
+            continue
+
         name_parts = parse_workspace_name(workspace.name)
         name_parts['icons'] = ' '.join([icon_for_window(w)
                                         for w in workspace.leaves()])
@@ -106,6 +110,8 @@ def rename_workspaces(i3):
         n += 1
 
         new_name = construct_workspace_name(name_parts)
+        if workspace.name == new_name:
+            continue
         i3.command('rename workspace "%s" to "%s"' % (workspace.name, new_name))
 
 
@@ -115,6 +121,8 @@ def on_exit(i3):
         name_parts = parse_workspace_name(workspace.name)
         name_parts['icons'] = None
         new_name = construct_workspace_name(name_parts)
+        if workspace.name == new_name:
+            continue
         i3.command('rename workspace "%s" to "%s"' % (workspace.name, new_name))
     i3.main_quit()
     sys.exit(0)
@@ -136,5 +144,9 @@ if __name__ == '__main__':
         if e.change in ['new', 'close', 'move']:
             rename_workspaces(i3)
 
+    def workspace_event_handler(i3, e):
+        rename_workspaces(i3)
+
     i3.on('window', window_event_handler)
+    i3.on('workspace', workspace_event_handler)
     i3.main()
