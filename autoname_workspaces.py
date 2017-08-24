@@ -92,6 +92,9 @@ def rename_workspaces(i3):
     for ws_index, workspace in enumerate(i3.get_tree().workspaces()):
         ws_info = ws_infos[ws_index]
 
+        if ws_info != focused_workspace(i3):
+            continue
+
         name_parts = parse_workspace_name(workspace.name)
         name_parts['icons'] = ' '.join([icon_for_window(w)
                                         for w in workspace.leaves()])
