@@ -106,6 +106,8 @@ def rename_workspaces(i3):
         n += 1
 
         new_name = construct_workspace_name(name_parts)
+        if workspace.name == new_name:
+            continue
         i3.command('rename workspace "%s" to "%s"' % (workspace.name, new_name))
 
 
@@ -115,6 +117,8 @@ def on_exit(i3):
         name_parts = parse_workspace_name(workspace.name)
         name_parts['icons'] = None
         new_name = construct_workspace_name(name_parts)
+        if workspace.name == new_name:
+            continue
         i3.command('rename workspace "%s" to "%s"' % (workspace.name, new_name))
     i3.main_quit()
     sys.exit(0)
