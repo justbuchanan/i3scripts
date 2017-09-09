@@ -93,8 +93,8 @@ def rename_workspaces(i3):
         ws_info = ws_infos[ws_index]
 
         name_parts = parse_workspace_name(workspace.name)
-        name_parts['icons'] = ' '.join([icon_for_window(w)
-                                        for w in workspace.leaves()])
+        name_parts['icons'] = ' '.join(
+            [icon_for_window(w) for w in workspace.leaves()])
 
         # As we enumerate, leave one gap in workspace numbers between each monitor.
         # This leaves a space to insert a new one later.

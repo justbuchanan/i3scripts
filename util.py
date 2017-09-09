@@ -12,7 +12,7 @@ def focused_workspace(i3):
 # Takes a workspace 'name' from i3 and splits it into three parts:
 # * 'num'
 # * 'shortname' - the workspace's name, assumed to have no spaces
-# * 'icons' - the string that comes after the 
+# * 'icons' - the string that comes after the
 # Any field that's missing will be None in the returned dict
 def parse_workspace_name(name):
     return re.match('(?P<num>\d+):?(?P<shortname>\w+)? ?(?P<icons>.+)?',
@@ -40,8 +40,7 @@ def construct_workspace_name(parts):
 def xprop(win_id, property):
     try:
         prop = proc.check_output(
-            ['xprop', '-id', str(win_id), property],
-            stderr=proc.DEVNULL)
+            ['xprop', '-id', str(win_id), property], stderr=proc.DEVNULL)
         prop = prop.decode('utf-8')
         return re.findall('"([^"]+)"', prop)
     except proc.CalledProcessError as e:

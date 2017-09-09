@@ -7,9 +7,9 @@
 # the workspace. It is compatible with the autoname_workspaces script and
 # renames only the "shortname" of the workspace, keeping the number and window
 # icons in place.
-# 
+#
 # Note that this script can be used without autoname_workspaces.py.
-# 
+#
 # Dependencies:
 # * zenity - install with system package manager
 # * i3ipc  - install with pip
@@ -21,14 +21,15 @@ import sys
 
 from util import *
 
+
 # show dialog and return what the user types in.
 def show_name_dialog():
     try:
         # use zenity to show a text box asking the user for a new workspace name
         prompt_title = "Rename Workspace:" if name_parts['shortname'] == None \
                             else "Rename Workspace '%s':" % name_parts['shortname']
-        response = proc.check_output(['zenity', '--entry', "--text={}".format(
-            prompt_title)])
+        response = proc.check_output(
+            ['zenity', '--entry', "--text={}".format(prompt_title)])
         new_shortname = response.decode('utf-8').strip()
         logging.info("New name from user: '%s'" % new_shortname)
 
@@ -64,5 +65,5 @@ if __name__ == '__main__':
 
     # get the current workspace and rename it
     workspace = [w for w in i3.get_workspaces() if w.focused][0]
-    res = i3.command('rename workspace "%s" to "%s"' %
-                     (workspace.name, new_name))
+    res = i3.command('rename workspace "%s" to "%s"' % (workspace.name,
+                                                        new_name))
