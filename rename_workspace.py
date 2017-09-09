@@ -21,14 +21,8 @@ import sys
 
 from util import *
 
-if __name__ == '__main__':
-    logging.basicConfig(level=logging.INFO)
-
-    i3 = i3ipc.Connection()
-    workspace = focused_workspace(i3)
-    name_parts = parse_workspace_name(workspace.name)
-    logging.info("Current workspace shortname: '%s'" % name_parts['shortname'])
-
+# show dialog and return what the user types in.
+def show_name_dialog():
     try:
         # use zenity to show a text box asking the user for a new workspace name
         prompt_title = "Rename Workspace:" if name_parts['shortname'] == None \
@@ -44,11 +38,28 @@ if __name__ == '__main__':
             proc.check_call(['zenity', '--error', '--text=%s' % msg])
             sys.exit(1)
 
+        return new_shortname
+
     except proc.CalledProcessError as e:
         logging.info("Cancelled by user, exiting...")
         sys.exit(1)
 
-    name_parts['shortname'] = new_shortname
+
+if __name__ == '__main__':
+    logging.basicConfig(level=logging.INFO)
+
+    i3 = i3ipc.Connection()
+    workspace = focused_workspace(i3)
+    name_parts = parse_workspace_name(workspace.name)
+    logging.info("Current workspace shortname: '%s'" % name_parts['shortname'])
+
+    if len(sys.argv) > 1:
+        # if name is specified as a command line arg
+        name_parts['shortname'] = sys.argv[1]
+    else:
+        # otherwise show dialog
+        name_parts['shortname'] = show_name_dialog()
+
     new_name = construct_workspace_name(name_parts)
 
     # get the current workspace and rename it
