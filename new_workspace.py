@@ -22,6 +22,17 @@ def find_next_ws_num_on_monitor(i3):
     return maxnum + 1
 
 
+def new_workspace(move_focused=False):
+    i3 = i3ipc.Connection()
+    new_ws_num = find_next_ws_num_on_monitor(i3)
+    if move_focused:
+        # move focused window the next open workspace
+        i3.command('move window to workspace number {0}; workspace {0}'.format(
+            new_ws_num))
+    else:
+        i3.command('workspace %d' % new_ws_num)
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="""
         Jump to a new workspace to the right of the existing ones on the current  monitor."""
@@ -34,12 +45,4 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     logging.basicConfig(level=logging.INFO)
-
-    i3 = i3ipc.Connection()
-    new_ws_num = find_next_ws_num_on_monitor(i3)
-    if args.move_focused:
-        # move focused window the next open workspace
-        i3.command('move window to workspace number {0}; workspace {0}'.format(
-            new_ws_num))
-    else:
-        i3.command('workspace %d' % new_ws_num)
+    new_workspace(args.move_focused)

@@ -22,7 +22,6 @@ import sys
 from util import *
 
 
-# show dialog and return what the user types in.
 def show_name_dialog():
     try:
         # use zenity to show a text box asking the user for a new workspace name
@@ -46,20 +45,13 @@ def show_name_dialog():
         sys.exit(1)
 
 
-if __name__ == '__main__':
-    logging.basicConfig(level=logging.INFO)
-
+def rename_workspace(shortname):
     i3 = i3ipc.Connection()
     workspace = focused_workspace(i3)
     name_parts = parse_workspace_name(workspace.name)
     logging.info("Current workspace shortname: '%s'" % name_parts['shortname'])
 
-    if len(sys.argv) > 1:
-        # if name is specified as a command line arg
-        name_parts['shortname'] = sys.argv[1]
-    else:
-        # otherwise show dialog
-        name_parts['shortname'] = show_name_dialog()
+    name_parts['shortname'] = shortname
 
     new_name = construct_workspace_name(name_parts)
 
@@ -67,3 +59,16 @@ if __name__ == '__main__':
     workspace = [w for w in i3.get_workspaces() if w.focused][0]
     res = i3.command('rename workspace "%s" to "%s"' % (workspace.name,
                                                         new_name))
+
+
+if __name__ == '__main__':
+    logging.basicConfig(level=logging.INFO)
+
+    if len(sys.argv) > 1:
+        # if name is specified as a command line arg
+        shortname = sys.argv[1]
+    else:
+        # otherwise show dialog
+        shortname = show_name_dialog()
+
+    rename_workspace(shortname)
