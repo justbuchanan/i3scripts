@@ -82,11 +82,11 @@ class Workspace:
         from new_workspace import new_workspace
         new_workspace()
 
-        # Rename the new workspace. Note that you may want to remove this or
-        # replace it with your own script if you're not also using the
-        # autoname_workspaces script in this directory.
-        from rename_workspace import rename_workspace
-        rename_workspace(self.name)
+        # # Rename the new workspace. Note that you may want to remove this or
+        # # replace it with your own script if you're not also using the
+        # # autoname_workspaces script in this directory.
+        # from rename_workspace import rename_workspace
+        # rename_workspace(self.name)
 
         self.load_i3layout()
         self.run_apps()
