@@ -25,7 +25,7 @@ def find_next_ws_num_on_monitor(i3):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="""
         Jump to a new workspace to the right of the existing ones on the current  monitor."""
-                                    )
+                                     )
     parser.add_argument(
         '--move_focused',
         '-m',
