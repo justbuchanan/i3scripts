@@ -8,8 +8,8 @@ import sys
 # github.com/justbuchanan/i3scripts/i3splat.py
 #
 # This module provides a compact way to specify layouts for i3wm and launch the
-# corresponding programs. Create a Workspace object containing the containers
-# and apps you want, then call launch()!
+# corresponding programs. Create a Workspace object with the containers and apps
+# you want, then call launch().
 #
 # Here's an example program:
 #
@@ -32,12 +32,14 @@ import sys
 #
 #   print(ws.serialize_i3layout())
 #
-# Note: This script is mostly independent of the other ones in this directory.
-# You will just need to modify or replace the Workspace.launch() method. See
-# comments in that method for more info.
+# Customization:
 #
-# This module provides functions for a few common apps, but you will likely want
-# to add your own. See the ones at the bottom of this file as examples.
+# * This script is mostly independent of the other ones in this repository. You
+#   will just need to modify or replace the Workspace.launch() method. See
+#   comments in that method for more info.
+#
+# * This module provides functions for a few common apps, but you will likely
+#   want to add your own. See the ones at the bottom of this file as examples.
 
 
 class Node:
