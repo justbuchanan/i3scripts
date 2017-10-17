@@ -22,16 +22,17 @@ import sys
 from util import *
 
 
-def show_name_dialog():
+def show_name_dialog(current_shortname):
     try:
         # use zenity to show a text box asking the user for a new workspace name
-        prompt_title = "Rename Workspace:" if name_parts['shortname'] == None \
-                            else "Rename Workspace '%s':" % name_parts['shortname']
+        prompt_title = "Rename Workspace:" if current_shortname == None \
+                            else "Rename Workspace '%s':" % current_shortname
         response = proc.check_output(
             ['zenity', '--entry', "--text={}".format(prompt_title)])
         new_shortname = response.decode('utf-8').strip()
         logging.info("New name from user: '%s'" % new_shortname)
 
+        # validate or fail
         if ' ' in new_shortname:
             msg = "No spaces allowed in workspace names"
             logging.error(msg)
@@ -45,30 +46,23 @@ def show_name_dialog():
         sys.exit(1)
 
 
-def rename_workspace(shortname):
+if __name__ == '__main__':
+    logging.basicConfig(level=logging.INFO)
+
     i3 = i3ipc.Connection()
     workspace = focused_workspace(i3)
     name_parts = parse_workspace_name(workspace.name)
     logging.info("Current workspace shortname: '%s'" % name_parts['shortname'])
 
-    name_parts['shortname'] = shortname
-
-    new_name = construct_workspace_name(name_parts)
-
-    # get the current workspace and rename it
-    workspace = [w for w in i3.get_workspaces() if w.focused][0]
-    res = i3.command('rename workspace "%s" to "%s"' % (workspace.name,
-                                                        new_name))
-
-
-if __name__ == '__main__':
-    logging.basicConfig(level=logging.INFO)
-
     if len(sys.argv) > 1:
         # if name is specified as a command line arg
-        shortname = sys.argv[1]
+        name_parts['shortname'] = sys.argv[1]
     else:
         # otherwise show dialog
-        shortname = show_name_dialog()
+        name_parts['shortname'] = show_name_dialog(name_parts['shortname'])
 
-    rename_workspace(shortname)
+    # get the current workspace and rename it
+    new_name = construct_workspace_name(name_parts)
+    workspace = focused_workspace(i3)
+    res = i3.command('rename workspace "%s" to "%s"' % (workspace.name, new_name))
+    assert res[0]['success'], "Failed to rename workspace"
