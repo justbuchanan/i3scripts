@@ -46,7 +46,8 @@ def show_name_dialog(current_shortname):
         sys.exit(1)
 
 
-if __name__ == '__main__':
+# If new_shortname is None, shows a zenity dialog asking for a new name
+def rename_workspace(new_shortname=None):
     logging.basicConfig(level=logging.INFO)
 
     i3 = i3ipc.Connection()
@@ -54,9 +55,9 @@ if __name__ == '__main__':
     name_parts = parse_workspace_name(workspace.name)
     logging.info("Current workspace shortname: '%s'" % name_parts['shortname'])
 
-    if len(sys.argv) > 1:
+    if new_shortname is not None:
         # if name is specified as a command line arg
-        name_parts['shortname'] = sys.argv[1]
+        name_parts['shortname'] = new_shortname
     else:
         # otherwise show dialog
         name_parts['shortname'] = show_name_dialog(name_parts['shortname'])
@@ -67,3 +68,8 @@ if __name__ == '__main__':
     res = i3.command('rename workspace "%s" to "%s"' % (workspace.name,
                                                         new_name))
     assert res[0]['success'], "Failed to rename workspace"
+
+
+if __name__ == '__main__':
+    new_shortname = sys.argv[1] if len(sys.argv) > 1 else None
+    rename_workspace(new_shortname)
