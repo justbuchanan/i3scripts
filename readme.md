@@ -27,7 +27,7 @@ Presents a small modal window with a text box that allows for renaming the curre
 ## i3splat.py
 
 This module provides a compact way to specify layouts for i3wm and launch the corresponding programs.
-Create a Workspace object containing the containers and apps you want, then call launch().
+Create a `Workspace` object containing the containers and apps you want, then call `launch()`.
 The specified layout will be loaded into i3, then the individual apps are launched in their places.
 See the file itself for more detailed documentation.
 
