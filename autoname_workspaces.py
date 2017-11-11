@@ -54,6 +54,7 @@ WINDOW_ICONS = {
     'firefox': fa.icons['firefox'],
     'google-chrome': fa.icons['chrome'],
     'gpick': fa.icons['eyedropper'],
+    'kicad': fa.icons['microchip'],
     'libreoffice': fa.icons['file-text-o'],
     'mupdf': fa.icons['file-pdf-o'],
     'spotify': fa.icons['music'],  # could also use the 'spotify' icon
