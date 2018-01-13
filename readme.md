@@ -1,4 +1,3 @@
-
 # i3 Scripts
 
 This repo contains a few scripts I've put together for i3.
@@ -14,7 +13,6 @@ In addition to showing program icons, it also renumbers i3 workspaces in ascendi
 This makes it easier to navigate.
 
 Here's a [demo](https://gfycat.com/AfraidAmusingCoyote).
-
 
 ## new_workspace.py
 
@@ -33,7 +31,7 @@ See the file itself for more detailed documentation.
 
 Here's an example program:
 
-~~~{.py}
+```{.py}
 from i3splat import *
 
 mydir = "~/src"
@@ -48,4 +46,4 @@ ws = Workspace("code", [
     ])
 )])
 ws.launch()
-~~~
+```
