@@ -55,9 +55,13 @@ WINDOW_ICONS = {
     'firefox': fa.icons['firefox'],
     'google-chrome': fa.icons['chrome'],
     'gpick': fa.icons['eyedropper'],
+    'keybase': fa.icons['key'],
     'kicad': fa.icons['microchip'],
+    'kitty': fa.icons['terminal'],
     'libreoffice': fa.icons['file-text-o'],
     'mupdf': fa.icons['file-pdf-o'],
+    'postman': fa.icons['space-shuttle'],
+    'slack': fa.icons['slack'],
     'spotify': fa.icons['music'],  # could also use the 'spotify' icon
     'steam': fa.icons['steam'],
     'subl': fa.icons['file-text-o'],
