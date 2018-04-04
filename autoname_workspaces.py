@@ -68,6 +68,7 @@ WINDOW_ICONS = {
     'subl': fa.icons['file-text-o'],
     'subl3': fa.icons['file-text-o'],
     'thunar': fa.icons['files-o'],
+    'thunderbird': fa.icons['envelope'],
     'urxvt': fa.icons['terminal'],
     'xfce4-terminal': fa.icons['terminal'],
     'zenity': fa.icons['window-maximize'],
