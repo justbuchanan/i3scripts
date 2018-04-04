@@ -48,6 +48,7 @@ from util import *
 WINDOW_ICONS = {
     'alacritty': fa.icons['terminal'],
     'atom': fa.icons['code'],
+    'banshee': fa.icons['play'],
     'cura': fa.icons['cube'],
     'darktable': fa.icons['picture-o'],
     'evince': fa.icons['file-pdf-o'],
