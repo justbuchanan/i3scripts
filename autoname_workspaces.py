@@ -48,6 +48,7 @@ from util import *
 WINDOW_ICONS = {
     'alacritty': fa.icons['terminal'],
     'atom': fa.icons['code'],
+    'banshee': fa.icons['play'],
     'cura': fa.icons['cube'],
     'darktable': fa.icons['picture-o'],
     'evince': fa.icons['file-pdf-o'],
@@ -67,6 +68,7 @@ WINDOW_ICONS = {
     'subl': fa.icons['file-text-o'],
     'subl3': fa.icons['file-text-o'],
     'thunar': fa.icons['files-o'],
+    'thunderbird': fa.icons['envelope'],
     'urxvt': fa.icons['terminal'],
     'xfce4-terminal': fa.icons['terminal'],
     'zenity': fa.icons['window-maximize'],
