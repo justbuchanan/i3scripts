@@ -3,6 +3,7 @@
 This repo contains a few scripts I've put together for i3.
 Below is a description of the important ones.
 See the script files themselves for more detailed info and instructions.
+Note that they function independently, so you can try out one in your workflow without committing to the rest.
 
 ## autorename_workspaces.py
 
