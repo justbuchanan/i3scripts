@@ -148,9 +148,10 @@ if __name__ == '__main__':
     rename_workspaces(i3)
 
     # Call rename_workspaces() for relevant window events
-    def window_event_handler(i3, e):
+    def event_handler(i3, e):
         if e.change in ['new', 'close', 'move']:
             rename_workspaces(i3)
 
-    i3.on('window', window_event_handler)
+    i3.on('window', event_handler)
+    i3.on('workspace::move', event_handler)
     i3.main()
