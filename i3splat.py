@@ -66,9 +66,7 @@ class App(Node):
         super().__init__()
         self.command = command
 
-        self.swallows = [{
-            'class': '^%s$' % xClass,
-        }]
+        self.swallows = [{'class': '^%s$' % xClass}]
         if xInstance != None:
             self.swallows[0]['instance'] = '^%s$' % xInstance
 

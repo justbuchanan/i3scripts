@@ -86,8 +86,8 @@ def icon_for_window(window):
             cls = cls.lower()  # case-insensitive matching
             if cls in WINDOW_ICONS:
                 return WINDOW_ICONS[cls]
-    logging.info(
-        'No icon available for window with classes: %s' % str(classes))
+    logging.info('No icon available for window with classes: %s' %
+                 str(classes))
     return DEFAULT_ICON
 
 
