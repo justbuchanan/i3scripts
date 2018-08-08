@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+#
+# github.com/justbuchanan/i3scripts
 
 import i3ipc
 import argparse

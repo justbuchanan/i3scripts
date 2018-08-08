@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-
-# https://github.com/justbuchanan/i3scripts
+#
+# github.com/justbuchanan/i3scripts
 #
 # This script is used to dynamically rename workspaces in i3. When run, it
 # presents a text field popup using zenity, in which you can type a new name for

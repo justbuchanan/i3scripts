@@ -1,11 +1,6 @@
-import subprocess
-import os
-import json
-import time
-import shlex
-import sys
-
-# github.com/justbuchanan/i3scripts/i3splat.py
+#!/usr/bin/env python3
+#
+# github.com/justbuchanan/i3scripts
 #
 # This module provides a compact way to specify layouts for i3wm and launch the
 # corresponding programs. Create a Workspace object with the containers and apps
@@ -40,6 +35,13 @@ import sys
 #
 # * This module provides functions for a few common apps, but you will likely
 #   want to add your own. See the ones at the bottom of this file as examples.
+
+import subprocess
+import os
+import json
+import time
+import shlex
+import sys
 
 
 class Node:
