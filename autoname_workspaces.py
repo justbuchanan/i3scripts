@@ -83,9 +83,8 @@ DEFAULT_ICON = '*'
 def ensure_window_icons_lowercase():
     for cls in WINDOW_ICONS:
         if cls != cls.lower():
-            raise ValueError(
-                "Keys in WINDOW_ICONS must be lowercase. Please fix '{}'.".
-                format(cls))
+            WINDOW_ICONS[cls.lower()] = WINDOW_ICONS[cls]
+            del WINDOW_ICONS[cls]
 
 
 def icon_for_window(window):
