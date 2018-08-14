@@ -96,8 +96,8 @@ def icon_for_window(window):
             cls = cls.lower()  # case-insensitive matching
             if cls in WINDOW_ICONS:
                 return WINDOW_ICONS[cls]
-    logging.info('No icon available for window with classes: %s' %
-                 str(classes))
+    logging.info(
+        'No icon available for window with classes: %s' % str(classes))
     return DEFAULT_ICON
 
 
@@ -128,8 +128,8 @@ def rename_workspaces(i3):
         new_name = construct_workspace_name(name_parts)
         if workspace.name == new_name:
             continue
-        i3.command('rename workspace "%s" to "%s"' % (workspace.name,
-                                                      new_name))
+        i3.command(
+            'rename workspace "%s" to "%s"' % (workspace.name, new_name))
 
 
 # Rename workspaces to just numbers and shortnames, removing the icons.
@@ -140,8 +140,8 @@ def on_exit(i3):
         new_name = construct_workspace_name(name_parts)
         if workspace.name == new_name:
             continue
-        i3.command('rename workspace "%s" to "%s"' % (workspace.name,
-                                                      new_name))
+        i3.command(
+            'rename workspace "%s" to "%s"' % (workspace.name, new_name))
     i3.main_quit()
     sys.exit(0)
 

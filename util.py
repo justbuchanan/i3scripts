@@ -4,6 +4,7 @@ import re
 import logging
 import subprocess as proc
 
+
 def focused_workspace(i3):
     return [w for w in i3.get_workspaces() if w.focused][0]
 
