@@ -58,6 +58,7 @@ WINDOW_ICONS = {
     'firefox': fa.icons['firefox'],
     'google-chrome': fa.icons['chrome'],
     'gpick': fa.icons['eyedropper'],
+    'imv': fa.icons['picture-o'],
     'keybase': fa.icons['key'],
     'kicad': fa.icons['microchip'],
     'kitty': fa.icons['terminal'],
