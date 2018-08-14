@@ -3,6 +3,10 @@
 import re
 import logging
 import subprocess as proc
+from collections import namedtuple
+
+# A type that represents a parsed workspace "name".
+NameParts = namedtuple('NameParts', ['num', 'shortname', 'icons'])
 
 
 def focused_workspace(i3):
@@ -15,22 +19,23 @@ def focused_workspace(i3):
 # * 'icons' - the string that comes after the
 # Any field that's missing will be None in the returned dict
 def parse_workspace_name(name):
-    return re.match('(?P<num>\d+):?(?P<shortname>\w+)? ?(?P<icons>.+)?',
-                    name).groupdict()
+    m = re.match('(?P<num>\d+):?(?P<shortname>\w+)? ?(?P<icons>.+)?',
+                 name).groupdict()
+    return NameParts(**m)
 
 
-# Given a dictionary with 'num', 'shortname', 'icons', returns the formatted name
+# Given a NameParts object, returns the formatted name
 # by concatenating them together.
 def construct_workspace_name(parts):
-    new_name = str(parts['num'])
-    if parts['shortname'] or parts['icons']:
+    new_name = str(parts.num)
+    if parts.shortname or parts.icons:
         new_name += ':'
 
-        if parts['shortname']:
-            new_name += parts['shortname']
+        if parts.shortname:
+            new_name += parts.shortname
 
-        if parts['icons']:
-            new_name += ' ' + parts['icons']
+        if parts.icons:
+            new_name += ' ' + parts.icons
 
     return new_name
 

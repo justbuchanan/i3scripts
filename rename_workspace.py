@@ -53,17 +53,18 @@ def rename_workspace(new_shortname=None):
     i3 = i3ipc.Connection()
     workspace = focused_workspace(i3)
     name_parts = parse_workspace_name(workspace.name)
-    logging.info("Current workspace shortname: '%s'" % name_parts['shortname'])
+    logging.info("Current workspace shortname: '%s'" % name_parts.shortname)
 
-    if new_shortname is not None:
-        # if name is specified as a command line arg
-        name_parts['shortname'] = new_shortname
-    else:
-        # otherwise show dialog
-        name_parts['shortname'] = show_name_dialog(name_parts['shortname'])
+    # If name is not specified as a command line arg, ask the user.
+    if new_shortname is None:
+        new_shortname = show_name_dialog(name_parts.shortname)
 
     # get the current workspace and rename it
-    new_name = construct_workspace_name(name_parts)
+    new_name = construct_workspace_name(
+        NameParts(
+            num=name_parts.num,
+            shortname=new_shortname,
+            icons=name_parts.icons))
     workspace = focused_workspace(i3)
     res = i3.command(
         'rename workspace "%s" to "%s"' % (workspace.name, new_name))

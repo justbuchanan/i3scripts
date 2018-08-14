@@ -112,8 +112,7 @@ def rename_workspaces(i3):
         ws_info = ws_infos[ws_index]
 
         name_parts = parse_workspace_name(workspace.name)
-        name_parts['icons'] = ' '.join(
-            [icon_for_window(w) for w in workspace.leaves()])
+        new_icons = ' '.join([icon_for_window(w) for w in workspace.leaves()])
 
         # As we enumerate, leave one gap in workspace numbers between each monitor.
         # This leaves a space to insert a new one later.
@@ -122,10 +121,12 @@ def rename_workspaces(i3):
         prev_output = ws_info.output
 
         # renumber workspace
-        name_parts['num'] = n
+        new_num = n
         n += 1
 
-        new_name = construct_workspace_name(name_parts)
+        new_name = construct_workspace_name(
+            NameParts(
+                num=new_num, shortname=name_parts.shortname, icons=new_icons))
         if workspace.name == new_name:
             continue
         i3.command(
@@ -136,8 +137,10 @@ def rename_workspaces(i3):
 def on_exit(i3):
     for workspace in i3.get_tree().workspaces():
         name_parts = parse_workspace_name(workspace.name)
-        name_parts['icons'] = None
-        new_name = construct_workspace_name(name_parts)
+        new_name = construct_workspace_name(
+            NameParts(
+                num=name_parts.num, shortname=name_parts.shortname,
+                icons=None))
         if workspace.name == new_name:
             continue
         i3.command(
