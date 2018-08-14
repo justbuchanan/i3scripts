@@ -80,6 +80,14 @@ WINDOW_ICONS = {
 DEFAULT_ICON = '*'
 
 
+def ensure_window_icons_lowercase():
+    for cls in WINDOW_ICONS:
+        if cls != cls.lower():
+            raise ValueError(
+                "Keys in WINDOW_ICONS must be lowercase. Please fix '{}'.".
+                format(cls))
+
+
 def icon_for_window(window):
     # Try all window classes and use the first one we have an icon for
     classes = xprop(window.window, 'WM_CLASS')
@@ -140,6 +148,8 @@ def on_exit(i3):
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
+
+    ensure_window_icons_lowercase()
 
     i3 = i3ipc.Connection()
 
