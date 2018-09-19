@@ -4,7 +4,7 @@
 #
 # This script listens for i3 events and updates workspace names to show icons
 # for running programs.  It contains icons for a few programs, but more can
-# easily be added by adding them to WINDOW_ICONS below.
+# easily be added by editing the WINDOW_ICONS list below.
 #
 # It also re-numbers workspaces in ascending order with one skipped number
 # between monitors (leaving a gap for a new workspace to be created). By
@@ -16,13 +16,13 @@
 # * fontawesome - install with pip
 #
 # Installation:
-# * Download this script and place it in ~/.config/i3/ (or anywhere you want)
-# * Add "exec_always ~/.config/i3/i3-autoname-workspaces.py &" to your i3 config
+# * Download this repo and place it in ~/.config/i3/ (or anywhere you want)
+# * Add "exec_always ~/.config/i3/i3scripts/autoname_workspaces.py &" to your i3 config
 # * Restart i3: $ i3-msg restart
 #
 # Configuration:
 # The default i3 config's keybindings reference workspaces by name, which is an
-# issue when using this script because the "names" are constantaly changing to
+# issue when using this script because the "names" are constantly changing to
 # include window icons.  Instead, you'll need to change the keybindings to
 # reference workspaces by number.  Change lines like:
 #   bindsym $mod+1 workspace 1
