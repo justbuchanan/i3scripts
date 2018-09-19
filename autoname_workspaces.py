@@ -63,6 +63,7 @@ WINDOW_ICONS = {
     'kicad': fa.icons['microchip'],
     'kitty': fa.icons['terminal'],
     'libreoffice': fa.icons['file-alt'],
+    'mpv': fa.icons['tv'],
     'mupdf': fa.icons['file-pdf'],
     'postman': fa.icons['space-shuttle'],
     'slack': fa.icons['slack'],
