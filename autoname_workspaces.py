@@ -65,6 +65,7 @@ WINDOW_ICONS = {
     'libreoffice': fa.icons['file-alt'],
     'mpv': fa.icons['tv'],
     'mupdf': fa.icons['file-pdf'],
+    'openscad': fa.icons['cube'],
     'postman': fa.icons['space-shuttle'],
     'slack': fa.icons['slack'],
     'spotify': fa.icons['music'],  # could also use the 'spotify' icon
