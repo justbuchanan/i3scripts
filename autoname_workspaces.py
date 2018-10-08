@@ -73,6 +73,7 @@ WINDOW_ICONS = {
     'subl': fa.icons['file-alt'],
     'subl3': fa.icons['file-alt'],
     'thunar': fa.icons['copy'],
+    'sublime_text': fa.icons['file-alt'],
     'thunderbird': fa.icons['envelope'],
     'urxvt': fa.icons['terminal'],
     'xfce4-terminal': fa.icons['terminal'],
