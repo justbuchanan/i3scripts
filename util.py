@@ -47,7 +47,7 @@ def xprop(win_id, property):
         prop = proc.check_output(
             ['xprop', '-id', str(win_id), property], stderr=proc.DEVNULL)
         prop = prop.decode('utf-8')
-        return re.findall('"([^"]+)"', prop)
+        return re.findall('"([^"]*)"', prop)
     except proc.CalledProcessError as e:
         logging.warn("Unable to get property for window '%d'" % win_id)
         return None
