@@ -73,6 +73,7 @@ WINDOW_ICONS = {
     'subl': fa.icons['file-alt'],
     'subl3': fa.icons['file-alt'],
     'thunar': fa.icons['copy'],
+    'slic3r.pl': fa.icons['cube'],
     'sublime_text': fa.icons['file-alt'],
     'thunderbird': fa.icons['envelope'],
     'urxvt': fa.icons['terminal'],
