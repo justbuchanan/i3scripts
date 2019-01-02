@@ -84,6 +84,7 @@ WINDOW_ICONS = {
     'mysql-workbench-bin': fa.icons['database'],
     'mupdf': fa.icons['file-pdf'],
     'openscad': fa.icons['cube'],
+    'pavucontrol': fa.icons['volume-up'],
     'postman': fa.icons['space-shuttle'],
     'rhythmbox': fa.icons['play'],
     'slack': fa.icons['slack'],
