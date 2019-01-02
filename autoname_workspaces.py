@@ -55,6 +55,7 @@ WINDOW_ICONS = {
     'chromium': fa.icons['chrome'],
     'cura': fa.icons['cube'],
     'darktable': fa.icons['image'],
+    'discord': fa.icons['comment'],
     'eclipse': fa.icons['code'],
     'emacs': fa.icons['code'],
     'eog': fa.icons['image'],
