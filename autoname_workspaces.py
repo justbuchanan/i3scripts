@@ -53,6 +53,8 @@ WINDOW_ICONS = {
     'banshee': fa.icons['play'],
     'cura': fa.icons['cube'],
     'darktable': fa.icons['image'],
+    'eclipse': fa.icons['code'],
+    'emacs': fa.icons['code'],
     'eog': fa.icons['image'],
     'evince': fa.icons['file-pdf'],
     'evolution': fa.icons['envelope'],
@@ -65,6 +67,8 @@ WINDOW_ICONS = {
     'google-chrome': fa.icons['chrome'],
     'gpick': fa.icons['eye-dropper'],
     'imv': fa.icons['image'],
+    'java': fa.icons['code'],
+    'jetbrains-studio': fa.icons['code'],
     'keybase': fa.icons['key'],
     'kicad': fa.icons['microchip'],
     'kitty': fa.icons['terminal'],
@@ -88,6 +92,7 @@ WINDOW_ICONS = {
     'thunderbird': fa.icons['envelope'],
     'urxvt': fa.icons['terminal'],
     'xfce4-terminal': fa.icons['terminal'],
+    'yelp': fa.icons['code'],
     'zenity': fa.icons['window-maximize'],
 }
 
