@@ -81,6 +81,7 @@ WINDOW_ICONS = {
     'nemo': fa.icons['copy'],
     'nautilus': fa.icons['copy'],
     'mpv': fa.icons['tv'],
+    'mysql-workbench-bin': fa.icons['database'],
     'mupdf': fa.icons['file-pdf'],
     'openscad': fa.icons['cube'],
     'postman': fa.icons['space-shuttle'],
