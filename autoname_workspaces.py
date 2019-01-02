@@ -77,6 +77,7 @@ WINDOW_ICONS = {
     'kicad': fa.icons['microchip'],
     'kitty': fa.icons['terminal'],
     'libreoffice': fa.icons['file-alt'],
+    'lua5.1': fa.icons['moon'],
     'nemo': fa.icons['copy'],
     'nautilus': fa.icons['copy'],
     'mpv': fa.icons['tv'],
