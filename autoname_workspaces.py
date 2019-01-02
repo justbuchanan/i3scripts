@@ -99,6 +99,7 @@ WINDOW_ICONS = {
     'thunderbird': fa.icons['envelope'],
     'urxvt': fa.icons['terminal'],
     'xfce4-terminal': fa.icons['terminal'],
+    'xournal': fa.icons['file-alt'],
     'yelp': fa.icons['code'],
     'zenity': fa.icons['window-maximize'],
 }
