@@ -29,6 +29,7 @@
 # To:
 #   bindsym $mod+1 workspace number 1
 
+import argparse
 import i3ipc
 import logging
 import signal
@@ -107,6 +108,11 @@ WINDOW_ICONS = {
 # This icon is used for any application not in the list above
 DEFAULT_ICON = '*'
 
+# Global setting that determines whether workspaces will be automatically
+# re-numbered in ascending order with a "gap" left on each monitor. This is
+# overridden via command-line flag.
+RENUMBER_WORKSPACES = True
+
 
 def ensure_window_icons_lowercase():
     for cls in WINDOW_ICONS:
@@ -147,8 +153,8 @@ def rename_workspaces(i3):
             n += 1
         prev_output = ws_info.output
 
-        # renumber workspace
-        new_num = n
+        # optionally renumber workspace
+        new_num = n if RENUMBER_WORKSPACES else name_parts.num
         n += 1
 
         new_name = construct_workspace_name(
@@ -177,6 +183,20 @@ def on_exit(i3):
 
 
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser(
+        description=
+        "Rename workspaces dynamically to show icons for running programs.")
+    parser.add_argument(
+        '--norenumber_workspaces',
+        action='store_true',
+        default=False,
+        help=
+        "Disable automatic workspace re-numbering. By default, workspaces are automatically re-numbered in ascending order."
+    )
+    args = parser.parse_args()
+
+    RENUMBER_WORKSPACES = not args.norenumber_workspaces
+
     logging.basicConfig(level=logging.INFO)
 
     ensure_window_icons_lowercase()
