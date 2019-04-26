@@ -73,6 +73,7 @@ WINDOW_ICONS = {
     'gpick': fa.icons['eye-dropper'],
     'imv': fa.icons['image'],
     'java': fa.icons['code'],
+    'jetbrains-idea': fa.icons['code'],
     'jetbrains-studio': fa.icons['code'],
     'keybase': fa.icons['key'],
     'kicad': fa.icons['microchip'],
@@ -88,6 +89,7 @@ WINDOW_ICONS = {
     'pavucontrol': fa.icons['volume-up'],
     'postman': fa.icons['space-shuttle'],
     'rhythmbox': fa.icons['play'],
+    'robo3t': fa.icons['database'],
     'slack': fa.icons['slack'],
     'slic3r.pl': fa.icons['cube'],
     'spotify': fa.icons['music'],  # could also use the 'spotify' icon
