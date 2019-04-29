@@ -75,6 +75,7 @@ WINDOW_ICONS = {
     'java': fa.icons['code'],
     'jetbrains-idea': fa.icons['code'],
     'jetbrains-studio': fa.icons['code'],
+    'keepassxc': fa.icons['key'],
     'keybase': fa.icons['key'],
     'kicad': fa.icons['microchip'],
     'kitty': fa.icons['terminal'],
