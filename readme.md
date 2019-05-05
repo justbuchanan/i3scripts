@@ -31,7 +31,7 @@ See the file itself for more detailed documentation.
 
 Here's an example program:
 
-```{.py}
+```python
 from i3splat import *
 
 mydir = "~/src"
