@@ -137,7 +137,7 @@ def icon_for_window(window):
 # renames all workspaces based on the windows present
 # also renumbers them in ascending order, with one gap left between monitors
 # for example: workspace numbering on two monitors: [1, 2, 3], [5, 6]
-def rename_workspaces(i3):
+def rename_workspaces(i3, icon_list_format='default'):
     ws_infos = i3.get_workspaces()
     prev_output = None
     n = 1
@@ -145,7 +145,8 @@ def rename_workspaces(i3):
         ws_info = ws_infos[ws_index]
 
         name_parts = parse_workspace_name(workspace.name)
-        new_icons = ' '.join([icon_for_window(w) for w in workspace.leaves()])
+        icon_list = [icon_for_window(w) for w in workspace.leaves()]
+        new_icons = format_icon_list(icon_list, icon_list_format)
 
         # As we enumerate, leave one gap in workspace numbers between each monitor.
         # This leaves a space to insert a new one later.
@@ -193,6 +194,17 @@ if __name__ == '__main__':
         help=
         "Disable automatic workspace re-numbering. By default, workspaces are automatically re-numbered in ascending order."
     )
+    parser.add_argument(
+        '--icon_list_format',
+        type=str,
+        default='default',
+        help=
+        "The formatting of the list of icons."
+        "Accepted values:"
+        "    - default: no formatting,"
+        "    - mathematician: factorize with superscripts (e.g. aababa -> a⁴b²),"
+        "    - chemist: factorize with subscripts (e.g. aababa -> a₄b₂)."
+    )
     args = parser.parse_args()
 
     RENUMBER_WORKSPACES = not args.norenumber_workspaces
@@ -207,12 +219,12 @@ if __name__ == '__main__':
     for sig in [signal.SIGINT, signal.SIGTERM]:
         signal.signal(sig, lambda signal, frame: on_exit(i3))
 
-    rename_workspaces(i3)
+    rename_workspaces(i3, icon_list_format=args.icon_list_format)
 
     # Call rename_workspaces() for relevant window events
     def event_handler(i3, e):
         if e.change in ['new', 'close', 'move']:
-            rename_workspaces(i3)
+            rename_workspaces(i3, icon_list_format=args.icon_list_format)
 
     i3.on('window', event_handler)
     i3.on('workspace::move', event_handler)
