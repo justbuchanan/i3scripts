@@ -115,10 +115,8 @@ RENUMBER_WORKSPACES = True
 
 
 def ensure_window_icons_lowercase():
-    for cls in WINDOW_ICONS:
-        if cls != cls.lower():
-            WINDOW_ICONS[cls.lower()] = WINDOW_ICONS[cls]
-            del WINDOW_ICONS[cls]
+    global WINDOW_ICONS
+    WINDOW_ICONS = {name.lower(): icon for name, icon in WINDOW_ICONS.items()}
 
 
 def icon_for_window(window):
