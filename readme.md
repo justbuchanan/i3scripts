@@ -9,7 +9,7 @@ Note that they function independently, so you can try out one in your workflow w
 This script dynamically updates the i3 bar to show icons for running programs next to the workspace names.
 It does this by listening for i3 window events and updating the workspace's "name".
 
-In addition to showing program icons, it also renumbers i3 workspaces in ascending order.
+In addition to showing program icons, it also (optionally) renumbers i3 workspaces in ascending order.
 This makes it easier to navigate.
 
 Here's a [demo](https://gfycat.com/AfraidAmusingCoyote).
