@@ -64,6 +64,7 @@ WINDOW_ICONS = {
     'evolution': fa.icons['envelope'],
     'feh': fa.icons['image'],
     'file-roller': fa.icons['compress'],
+    'filezilla': fa.icons['server'],
     'firefox': fa.icons['firefox'],
     'firefox-esr': fa.icons['firefox'],
     'gimp-2.8': fa.icons['image'],
