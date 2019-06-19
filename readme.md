@@ -1,6 +1,6 @@
 # i3 Scripts
 
-This repo contains a few scripts I've put together for i3.
+This repo contains a few scripts I've put together for [i3](https://github.com/i3/i3).
 Below are the highlights, but see the script files themselves for more detailed info and instructions.
 Note that they function independently, so you can try out one in your workflow without committing to using the rest.
 
