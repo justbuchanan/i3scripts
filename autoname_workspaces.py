@@ -73,6 +73,7 @@ WINDOW_ICONS = {
     'google-chrome': fa.icons['chrome'],
     'gpick': fa.icons['eye-dropper'],
     'imv': fa.icons['image'],
+    'insomnia': fa.icons['globe'],
     'java': fa.icons['code'],
     'jetbrains-idea': fa.icons['code'],
     'jetbrains-studio': fa.icons['code'],
