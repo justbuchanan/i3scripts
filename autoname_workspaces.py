@@ -53,10 +53,12 @@ WINDOW_ICONS = {
     'atom': fa.icons['code'],
     'banshee': fa.icons['play'],
     'blender': fa.icons['cube'],
+    'blueman-manager': fa.icons['bluetooth'],
     'chromium': fa.icons['chrome'],
+    'code': fa.icons['code'],
     'cura': fa.icons['cube'],
     'darktable': fa.icons['image'],
-    'discord': fa.icons['comment'],
+    'discord': fa.icons['discord'],
     'eclipse': fa.icons['code'],
     'emacs': fa.icons['code'],
     'eog': fa.icons['image'],
@@ -67,9 +69,14 @@ WINDOW_ICONS = {
     'filezilla': fa.icons['server'],
     'firefox': fa.icons['firefox'],
     'firefox-esr': fa.icons['firefox'],
+    'geary': fa.icons ['inbox'],
     'gimp-2.8': fa.icons['image'],
-    'gnome-control-center': fa.icons['toggle-on'],
+    'gnome-calculator': fa.icons['calculator'],
+    'gnome-control-center': fa.icons['cogs'],
+    'gonme-software': fa.icons['shopping-bag'],
+    'gnome-system-monitor': fa.icons['chart-area'],
     'gnome-terminal-server': fa.icons['terminal'],
+    'gnome-tweaks': fa.icons['toggle-on'],
     'google-chrome': fa.icons['chrome'],
     'gpick': fa.icons['eye-dropper'],
     'imv': fa.icons['image'],
@@ -88,21 +95,26 @@ WINDOW_ICONS = {
     'nautilus': fa.icons['copy'],
     'nemo': fa.icons['copy'],
     'openscad': fa.icons['cube'],
+    'org.gnome.gedit': fa.icons['file-signature'],
+    'org.gnome.nautilus': fa.icons['folder'],
     'pavucontrol': fa.icons['volume-up'],
     'postman': fa.icons['space-shuttle'],
     'rhythmbox': fa.icons['play'],
     'robo3t': fa.icons['database'],
     'slack': fa.icons['slack'],
     'slic3r.pl': fa.icons['cube'],
-    'spotify': fa.icons['music'],  # could also use the 'spotify' icon
+    'spotify': fa.icons['spotify'],
     'steam': fa.icons['steam'],
     'subl': fa.icons['file-alt'],
     'subl3': fa.icons['file-alt'],
     'sublime_text': fa.icons['file-alt'],
+    'squeak': fa.icons['fly'],
+    'telegram': fa.icons['telegram'],
     'thunar': fa.icons['copy'],
-    'thunderbird': fa.icons['envelope'],
+    'thunderbird': fa.icons['envelope-open-text'],
     'totem': fa.icons['play'],
     'urxvt': fa.icons['terminal'],
+    'vcastqt': fa.icons['chevron-right'],
     'xfce4-terminal': fa.icons['terminal'],
     'xournal': fa.icons['file-alt'],
     'yelp': fa.icons['code'],
@@ -111,7 +123,7 @@ WINDOW_ICONS = {
 }
 
 # This icon is used for any application not in the list above
-DEFAULT_ICON = '*'
+DEFAULT_ICON = fa.icons['question']
 
 # Global setting that determines whether workspaces will be automatically
 # re-numbered in ascending order with a "gap" left on each monitor. This is
