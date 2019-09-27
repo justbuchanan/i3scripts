@@ -13,7 +13,6 @@
 # Dependencies
 # * xorg-xprop  - install through system package manager
 # * i3ipc       - install with pip
-# * fontawesome - install with pip
 #
 # Installation:
 # * Download this repo and place it in ~/.config/i3/ (or anywhere you want)
@@ -30,93 +29,39 @@
 #   bindsym $mod+1 workspace number 1
 
 import argparse
+import configparser
 import i3ipc
 import logging
 import signal
 import sys
-import fontawesome as fa
+from inspect import getsourcefile
+from os.path import abspath,dirname,isfile
 
 from util import *
-
-# Add icons here for common programs you use.  The keys are the X window class
-# (WM_CLASS) names (lower-cased) and the icons can be any text you want to
-# display.
-#
-# Most of these are character codes for font awesome:
-#   http://fortawesome.github.io/Font-Awesome/icons/
-#
-# If you're not sure what the WM_CLASS is for your application, you can use
-# xprop (https://linux.die.net/man/1/xprop). Run `xprop | grep WM_CLASS`
-# then click on the application you want to inspect.
-WINDOW_ICONS = {
-    'alacritty': fa.icons['terminal'],
-    'atom': fa.icons['code'],
-    'banshee': fa.icons['play'],
-    'blender': fa.icons['cube'],
-    'chromium': fa.icons['chrome'],
-    'cura': fa.icons['cube'],
-    'darktable': fa.icons['image'],
-    'discord': fa.icons['comment'],
-    'eclipse': fa.icons['code'],
-    'emacs': fa.icons['code'],
-    'eog': fa.icons['image'],
-    'evince': fa.icons['file-pdf'],
-    'evolution': fa.icons['envelope'],
-    'feh': fa.icons['image'],
-    'file-roller': fa.icons['compress'],
-    'filezilla': fa.icons['server'],
-    'firefox': fa.icons['firefox'],
-    'firefox-esr': fa.icons['firefox'],
-    'gimp-2.8': fa.icons['image'],
-    'gnome-control-center': fa.icons['toggle-on'],
-    'gnome-terminal-server': fa.icons['terminal'],
-    'google-chrome': fa.icons['chrome'],
-    'gpick': fa.icons['eye-dropper'],
-    'imv': fa.icons['image'],
-    'java': fa.icons['code'],
-    'jetbrains-idea': fa.icons['code'],
-    'jetbrains-studio': fa.icons['code'],
-    'keepassxc': fa.icons['key'],
-    'keybase': fa.icons['key'],
-    'kicad': fa.icons['microchip'],
-    'kitty': fa.icons['terminal'],
-    'libreoffice': fa.icons['file-alt'],
-    'lua5.1': fa.icons['moon'],
-    'mpv': fa.icons['tv'],
-    'mupdf': fa.icons['file-pdf'],
-    'mysql-workbench-bin': fa.icons['database'],
-    'nautilus': fa.icons['copy'],
-    'nemo': fa.icons['copy'],
-    'openscad': fa.icons['cube'],
-    'pavucontrol': fa.icons['volume-up'],
-    'postman': fa.icons['space-shuttle'],
-    'rhythmbox': fa.icons['play'],
-    'robo3t': fa.icons['database'],
-    'slack': fa.icons['slack'],
-    'slic3r.pl': fa.icons['cube'],
-    'spotify': fa.icons['music'],  # could also use the 'spotify' icon
-    'steam': fa.icons['steam'],
-    'subl': fa.icons['file-alt'],
-    'subl3': fa.icons['file-alt'],
-    'sublime_text': fa.icons['file-alt'],
-    'thunar': fa.icons['copy'],
-    'thunderbird': fa.icons['envelope'],
-    'totem': fa.icons['play'],
-    'urxvt': fa.icons['terminal'],
-    'xfce4-terminal': fa.icons['terminal'],
-    'xournal': fa.icons['file-alt'],
-    'yelp': fa.icons['code'],
-    'zenity': fa.icons['window-maximize'],
-    'zoom': fa.icons['comment'],
-}
-
-# This icon is used for any application not in the list above
-DEFAULT_ICON = '*'
 
 # Global setting that determines whether workspaces will be automatically
 # re-numbered in ascending order with a "gap" left on each monitor. This is
 # overridden via command-line flag.
 RENUMBER_WORKSPACES = True
+
+# The default config file. Can be overwritten by command-line option.
+DEFAULT_CONFIG_FILE = dirname(abspath(getsourcefile(lambda:0)))+'/icons.ini'
+
+def load_config(filename):
+    global WINDOW_ICONS
+    global DEFAULT_ICON
+
+    try:
+        if not isfile(filename):
+            raise Exception('File "'+filename+'" not found')
+        Config = configparser.ConfigParser()
+        Config.read(filename)
+
+        WINDOW_ICONS = dict(Config.items('icons'))
+        DEFAULT_ICON = Config['general']['default-icon']
+    except Exception as e:
+        print('Could not read in config file: '+str(e))
+        sys.exit(-1)
 
 
 def ensure_window_icons_lowercase():
@@ -208,7 +153,15 @@ if __name__ == '__main__':
         "    - mathematician: factorize with superscripts (e.g. aababa -> a⁴b²),"
         "    - chemist: factorize with subscripts (e.g. aababa -> a₄b₂)."
     )
+    parser.add_argument(
+        '-c', '--config',
+        type=str,
+        default=DEFAULT_CONFIG_FILE,
+        help="Config file for the icons."
+    )
     args = parser.parse_args()
+
+    load_config(args.config)
 
     RENUMBER_WORKSPACES = not args.norenumber_workspaces
 
