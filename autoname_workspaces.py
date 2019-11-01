@@ -63,12 +63,12 @@ WINDOW_ICONS = {
     'alacritty': terminal,
     'atom': '',
     'banshee': play,
-    'blender': cube,
+    'blender': '',
     'chromium': '',
     'cura': cube,
     'darktable': image,
     'discord': 'ﭮ',
-    'eclipse': code,
+    'eclipse': '',
     'emacs': code,
     'eog': image,
     'evince': pdf,
@@ -121,17 +121,18 @@ WINDOW_ICONS = {
     'zoom': '',
     'feh': '',
     'lutris': '',
-    'code': code,
+    'code': '',
     'ts3client_linux_amd64': '',
     'mumble': '',
     'Wine': '',
     'anydesk': '',
     'obs': "辶",
-    'termite': terminal, 
+    'termite': terminal,
+    'insomnia': "ﭧ",
 }
 
 # This icon is used for any application not in the list above
-DEFAULT_ICON = '*'
+DEFAULT_ICON = ''
 
 # Global setting that determines whether workspaces will be automatically
 # re-numbered in ascending order with a "gap" left on each monitor. This is
