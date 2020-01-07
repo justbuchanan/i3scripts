@@ -15,9 +15,9 @@ def find_next_ws_num_on_monitor(i3):
     focused_monitor = focused_workspace(i3).output
     logging.info('focused monitor: %s' % focused_monitor)
 
-    ws_on_monitor = filter(lambda ws: ws['output'] == focused_monitor,
+    ws_on_monitor = filter(lambda ws: ws.output == focused_monitor,
                            i3.get_workspaces())
-    nums = [ws['num'] for ws in ws_on_monitor]
+    nums = [ws.num for ws in ws_on_monitor]
     maxnum = max(nums)
     logging.info('max workspace on monitor: %s' % str(maxnum))
 
