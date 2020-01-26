@@ -58,6 +58,7 @@ file = ''
 pdf = ''
 mail = ''
 image = ''
+voice = ''
 
 WINDOW_ICONS = {
     'alacritty': terminal,
@@ -79,6 +80,7 @@ WINDOW_ICONS = {
     'firefox': '',
     'firefox-esr': '',
     'gimp-2.8': image,
+    'gimp': image,
     'gnome-control-center': '',
     'gnome-terminal-server': terminal,
     'google-chrome': '',
@@ -93,7 +95,7 @@ WINDOW_ICONS = {
     'kitty': terminal,
     'libreoffice': file,
     'lua5.1': '',
-    'mpv': 'tv',
+    'mpv': '',
     'mupdf': pdf,
     'mysql-workbench-bin': '',
     'nautilus': copy,
@@ -122,13 +124,17 @@ WINDOW_ICONS = {
     'feh': '',
     'lutris': '',
     'code': '',
-    'ts3client_linux_amd64': '',
-    'mumble': '',
+    'ts3client_linux_amd64': voice,
+    'TeamSpeak': voice,
+    'mumble': voice,
     'Wine': '',
     'anydesk': '',
-    'obs': "辶",
+    'obs': '辶',
     'termite': terminal,
-    'insomnia': "ﭧ",
+    'insomnia': 'ﭧ',
+    'simplenote': '',
+    'Godot': code,
+    'lbry': ''
 }
 
 # This icon is used for any application not in the list above
