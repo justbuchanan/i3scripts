@@ -58,7 +58,7 @@ file = ''
 pdf = ''
 mail = ''
 image = ''
-voice = ''
+voice = '🎤'
 
 WINDOW_ICONS = {
     'alacritty': terminal,
@@ -101,7 +101,7 @@ WINDOW_ICONS = {
     'nautilus': copy,
     'nemo': copy,
     'openscad': cube,
-    'pavucontrol': '蓼',
+    'pavucontrol': '🔊',
     'postman': '',
     'rhythmbox': play,
     'robo3t': '',
@@ -127,6 +127,7 @@ WINDOW_ICONS = {
     'ts3client_linux_amd64': voice,
     'TeamSpeak': voice,
     'mumble': voice,
+    'skype' : '', 
     'Wine': '',
     'anydesk': '',
     'obs': '辶',
