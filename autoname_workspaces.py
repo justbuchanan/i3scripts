@@ -55,6 +55,7 @@ WINDOW_ICONS = {
     'blender': fa.icons['cube'],
     'blueman-manager': fa.icons['bluetooth'],
     'chromium': fa.icons['chrome'],
+    'chromium-browser': fa.icons['chrome'],
     'code': fa.icons['code'],
     'cura': fa.icons['cube'],
     'darktable': fa.icons['image'],
