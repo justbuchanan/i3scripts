@@ -74,7 +74,7 @@ WINDOW_ICONS = {
     'gimp-2.8': fa.icons['image'],
     'gnome-calculator': fa.icons['calculator'],
     'gnome-control-center': fa.icons['cogs'],
-    'gonme-software': fa.icons['shopping-bag'],
+    'gnome-software': fa.icons['shopping-bag'],
     'gnome-system-monitor': fa.icons['chart-area'],
     'gnome-terminal-server': fa.icons['terminal'],
     'gnome-tweaks': fa.icons['toggle-on'],
@@ -90,6 +90,7 @@ WINDOW_ICONS = {
     'kitty': fa.icons['terminal'],
     'libreoffice': fa.icons['file-alt'],
     'lua5.1': fa.icons['moon'],
+    'minetime': fa.icons['calendar-alt'],
     'mpv': fa.icons['tv'],
     'mupdf': fa.icons['file-pdf'],
     'mysql-workbench-bin': fa.icons['database'],
@@ -119,8 +120,9 @@ WINDOW_ICONS = {
     'xfce4-terminal': fa.icons['terminal'],
     'xournal': fa.icons['file-alt'],
     'yelp': fa.icons['code'],
+    'youtube.com': fa.icons['youtube'],
     'zenity': fa.icons['window-maximize'],
-    'zoom': fa.icons['comment'],
+    'zoom': fa.icons['video'],
 }
 
 # This icon is used for any application not in the list above
