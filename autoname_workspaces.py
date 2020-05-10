@@ -84,6 +84,7 @@ WINDOW_ICONS = {
     'gnome-control-center': '',
     'gnome-terminal-server': terminal,
     'google-chrome': '',
+    'brave-browser': '爵',
     'gpick': '',
     'imv': image,
     'java': '',
