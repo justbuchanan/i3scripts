@@ -13,7 +13,7 @@
 # Dependencies
 # * xorg-xprop  - install through system package manager
 # * i3ipc       - install with pip
-# * fontawesome - install with pip
+# * https://github.com/ryanoasis/nerd-fonts - use install.sh
 #
 # Installation:
 # * Download this repo and place it in ~/.config/i3/ (or anywhere you want)
@@ -34,7 +34,6 @@ import i3ipc
 import logging
 import signal
 import sys
-import fontawesome as fa
 
 from util import *
 
@@ -42,76 +41,106 @@ from util import *
 # (WM_CLASS) names (lower-cased) and the icons can be any text you want to
 # display.
 #
-# Most of these are character codes for font awesome:
-#   http://fortawesome.github.io/Font-Awesome/icons/
+# Most of these are character codes for nerd fonts:
+#   https://github.com/ryanoasis/nerd-fonts
+# Search on:
+#   https://www.nerdfonts.com/cheat-sheet
 #
 # If you're not sure what the WM_CLASS is for your application, you can use
 # xprop (https://linux.die.net/man/1/xprop). Run `xprop | grep WM_CLASS`
 # then click on the application you want to inspect.
+terminal = ''
+code = ''
+play = ''
+cube = ''
+copy = ''
+file = ''
+pdf = ''
+mail = ''
+image = ''
+voice = '🎤'
+
 WINDOW_ICONS = {
-    'alacritty': fa.icons['terminal'],
-    'atom': fa.icons['code'],
-    'banshee': fa.icons['play'],
-    'blender': fa.icons['cube'],
-    'chromium': fa.icons['chrome'],
-    'cura': fa.icons['cube'],
-    'darktable': fa.icons['image'],
-    'discord': fa.icons['comment'],
-    'eclipse': fa.icons['code'],
-    'emacs': fa.icons['code'],
-    'eog': fa.icons['image'],
-    'evince': fa.icons['file-pdf'],
-    'evolution': fa.icons['envelope'],
-    'feh': fa.icons['image'],
-    'file-roller': fa.icons['compress'],
-    'filezilla': fa.icons['server'],
-    'firefox': fa.icons['firefox'],
-    'firefox-esr': fa.icons['firefox'],
-    'gimp-2.8': fa.icons['image'],
-    'gnome-control-center': fa.icons['toggle-on'],
-    'gnome-terminal-server': fa.icons['terminal'],
-    'google-chrome': fa.icons['chrome'],
-    'gpick': fa.icons['eye-dropper'],
-    'imv': fa.icons['image'],
-    'java': fa.icons['code'],
-    'jetbrains-idea': fa.icons['code'],
-    'jetbrains-studio': fa.icons['code'],
-    'keepassxc': fa.icons['key'],
-    'keybase': fa.icons['key'],
-    'kicad': fa.icons['microchip'],
-    'kitty': fa.icons['terminal'],
-    'libreoffice': fa.icons['file-alt'],
-    'lua5.1': fa.icons['moon'],
-    'mpv': fa.icons['tv'],
-    'mupdf': fa.icons['file-pdf'],
-    'mysql-workbench-bin': fa.icons['database'],
-    'nautilus': fa.icons['copy'],
-    'nemo': fa.icons['copy'],
-    'openscad': fa.icons['cube'],
-    'pavucontrol': fa.icons['volume-up'],
-    'postman': fa.icons['space-shuttle'],
-    'rhythmbox': fa.icons['play'],
-    'robo3t': fa.icons['database'],
-    'slack': fa.icons['slack'],
-    'slic3r.pl': fa.icons['cube'],
-    'spotify': fa.icons['music'],  # could also use the 'spotify' icon
-    'steam': fa.icons['steam'],
-    'subl': fa.icons['file-alt'],
-    'subl3': fa.icons['file-alt'],
-    'sublime_text': fa.icons['file-alt'],
-    'thunar': fa.icons['copy'],
-    'thunderbird': fa.icons['envelope'],
-    'totem': fa.icons['play'],
-    'urxvt': fa.icons['terminal'],
-    'xfce4-terminal': fa.icons['terminal'],
-    'xournal': fa.icons['file-alt'],
-    'yelp': fa.icons['code'],
-    'zenity': fa.icons['window-maximize'],
-    'zoom': fa.icons['comment'],
+    'alacritty': terminal,
+    'atom': '',
+    'banshee': play,
+    'blender': '',
+    'chromium': '',
+    'cura': cube,
+    'darktable': image,
+    'discord': 'ﭮ',
+    'eclipse': '',
+    'emacs': code,
+    'eog': image,
+    'evince': pdf,
+    'evolution': mail,
+    'feh': image,
+    'file-roller': '',
+    'filezilla': '',
+    'firefox': '',
+    'firefox-esr': '',
+    'gimp-2.8': image,
+    'gimp': image,
+    'gnome-control-center': '',
+    'gnome-terminal-server': terminal,
+    'google-chrome': '',
+    'brave-browser': '爵',
+    'gpick': '',
+    'imv': image,
+    'java': '',
+    'jetbrains-idea': code,
+    'jetbrains-studio': code,
+    'keepassxc': '',
+    'keybase': '',
+    'kicad': '',
+    'kitty': terminal,
+    'libreoffice': file,
+    'lua5.1': '',
+    'mpv': '',
+    'mupdf': pdf,
+    'mysql-workbench-bin': '',
+    'nautilus': copy,
+    'nemo': copy,
+    'openscad': cube,
+    'pavucontrol': '🔊',
+    'postman': '',
+    'rhythmbox': play,
+    'robo3t': '',
+    'slack': '',
+    'slic3r.pl': cube,
+    'spotify': '',
+    'steam': '',
+    'subl': file,
+    'subl3': file,
+    'sublime_text': file,
+    'thunar': copy,
+    'thunderbird': mail,
+    'totem': play,
+    'urxvt': terminal,
+    'xfce4-terminal': terminal,
+    'xournal': file,
+    'yelp': code,
+    'zenity': '',
+    'zoom': '',
+    'feh': '',
+    'lutris': '',
+    'code': '',
+    'ts3client_linux_amd64': voice,
+    'TeamSpeak': voice,
+    'mumble': voice,
+    'skype' : '', 
+    'Wine': '',
+    'anydesk': '',
+    'obs': '辶',
+    'termite': terminal,
+    'insomnia': 'ﭧ',
+    'simplenote': '',
+    'Godot': code,
+    'lbry': ''
 }
 
 # This icon is used for any application not in the list above
-DEFAULT_ICON = '*'
+DEFAULT_ICON = ''
 
 # Global setting that determines whether workspaces will be automatically
 # re-numbered in ascending order with a "gap" left on each monitor. This is
