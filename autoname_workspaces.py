@@ -72,6 +72,7 @@ WINDOW_ICONS = {
     'gnome-control-center': fa.icons['toggle-on'],
     'gnome-terminal-server': fa.icons['terminal'],
     'google-chrome': fa.icons['chrome'],
+    'prusa-slicer': fa.icons['cube'],
     'gpick': fa.icons['eye-dropper'],
     'imv': fa.icons['image'],
     'insomnia': fa.icons['globe'],
