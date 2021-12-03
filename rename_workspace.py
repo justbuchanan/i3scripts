@@ -61,13 +61,12 @@ def rename_workspace(new_shortname=None):
 
     # get the current workspace and rename it
     new_name = construct_workspace_name(
-        NameParts(
-            num=name_parts.num,
-            shortname=new_shortname,
-            icons=name_parts.icons))
+        NameParts(num=name_parts.num,
+                  shortname=new_shortname,
+                  icons=name_parts.icons))
     workspace = focused_workspace(i3)
-    res = i3.command(
-        'rename workspace "%s" to "%s"' % (workspace.name, new_name))
+    res = i3.command('rename workspace "%s" to "%s"' %
+                     (workspace.name, new_name))
     assert res[0]['success'], "Failed to rename workspace"
 
 

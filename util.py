@@ -57,6 +57,7 @@ def xprop(win_id, property):
 _superscript = "⁰¹²³⁴⁵⁶⁷⁸⁹"
 _subscript = "₀₁₂₃₄₅₆₇₈₉"
 
+
 def _encode_base_10_number(n: int, symbols: str) -> str:
     """Write a number in base 10 using symbols from a given string.
 
@@ -82,7 +83,8 @@ def format_icon_list(icon_list, icon_list_format='default'):
         new_list = []
         for icon, count in Counter(icon_list).items():
             if count > 1:
-                new_list.append(icon + _encode_base_10_number(count, _superscript))
+                new_list.append(icon +
+                                _encode_base_10_number(count, _superscript))
             else:
                 new_list.append(icon)
         return ' '.join(new_list)
@@ -93,11 +95,12 @@ def format_icon_list(icon_list, icon_list_format='default'):
         new_list = []
         for icon, count in Counter(icon_list).items():
             if count > 1:
-                new_list.append(icon + _encode_base_10_number(count, _subscript))
+                new_list.append(icon +
+                                _encode_base_10_number(count, _subscript))
             else:
                 new_list.append(icon)
         return ' '.join(new_list)
 
     else:
-        raise ValueError("Unknown format name for the list of icons: ", icon_list_format)
-
+        raise ValueError("Unknown format name for the list of icons: ",
+                         icon_list_format)

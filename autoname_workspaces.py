@@ -136,8 +136,8 @@ def icon_for_window(window):
             cls = cls.lower()  # case-insensitive matching
             if cls in WINDOW_ICONS:
                 return WINDOW_ICONS[cls]
-    logging.info(
-        'No icon available for window with classes: %s' % str(classes))
+    logging.info('No icon available for window with classes: %s' %
+                 str(classes))
     return DEFAULT_ICON
 
 
@@ -166,12 +166,13 @@ def rename_workspaces(i3, icon_list_format='default'):
         n += 1
 
         new_name = construct_workspace_name(
-            NameParts(
-                num=new_num, shortname=name_parts.shortname, icons=new_icons))
+            NameParts(num=new_num,
+                      shortname=name_parts.shortname,
+                      icons=new_icons))
         if workspace.name == new_name:
             continue
-        i3.command(
-            'rename workspace "%s" to "%s"' % (workspace.name, new_name))
+        i3.command('rename workspace "%s" to "%s"' %
+                   (workspace.name, new_name))
 
 
 # Rename workspaces to just numbers and shortnames, removing the icons.
@@ -179,13 +180,13 @@ def on_exit(i3):
     for workspace in i3.get_tree().workspaces():
         name_parts = parse_workspace_name(workspace.name)
         new_name = construct_workspace_name(
-            NameParts(
-                num=name_parts.num, shortname=name_parts.shortname,
-                icons=None))
+            NameParts(num=name_parts.num,
+                      shortname=name_parts.shortname,
+                      icons=None))
         if workspace.name == new_name:
             continue
-        i3.command(
-            'rename workspace "%s" to "%s"' % (workspace.name, new_name))
+        i3.command('rename workspace "%s" to "%s"' %
+                   (workspace.name, new_name))
     i3.main_quit()
     sys.exit(0)
 
@@ -205,13 +206,11 @@ if __name__ == '__main__':
         '--icon_list_format',
         type=str,
         default='default',
-        help=
-        "The formatting of the list of icons."
+        help="The formatting of the list of icons."
         "Accepted values:"
         "    - default: no formatting,"
         "    - mathematician: factorize with superscripts (e.g. aababa -> a⁴b²),"
-        "    - chemist: factorize with subscripts (e.g. aababa -> a₄b₂)."
-    )
+        "    - chemist: factorize with subscripts (e.g. aababa -> a₄b₂).")
     args = parser.parse_args()
 
     RENUMBER_WORKSPACES = not args.norenumber_workspaces
